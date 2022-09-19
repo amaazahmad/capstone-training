@@ -1,4 +1,9 @@
-import InputBar from "../inputBar/inputBar.component";
+import {
+	createUserAccount,
+	signInUser,
+} from "../../utils/firebase/firebase.utils";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 type UserFormProps = {
 	isLogin: boolean;
@@ -6,21 +11,78 @@ type UserFormProps = {
 
 function UserForm(props: UserFormProps) {
 	const { isLogin } = props;
+	const navigate = useNavigate();
 
-	const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const form = event.currentTarget;
-		const name = form.name_input.value;
-		const email = form.email_input.value;
-		const password = form.password_input.value;
-		const confirmPassword = form.confirm_password_input?.value;
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			name_input: "",
+			email_input: "",
+			password_input: "",
+			confirm_password_input: "",
+		},
+	});
+
+	const onSubmitHandler = handleSubmit(async (data) => {
+		const name = data.name_input;
+		const email = data.email_input;
+		const password = data.password_input;
+		const confirmPassword = data.confirm_password_input;
 
 		console.log(name, email, password, confirmPassword);
-	};
+		let resp;
+		if (isLogin) resp = await signInUser(email, password);
+		else resp = await createUserAccount(email, password);
+
+		if (!(resp instanceof Error)) navigate("/home");
+	});
 
 	return (
 		<div>
 			<form onSubmit={onSubmitHandler}>
+				{!isLogin && (
+					<input
+						{...register("name_input", { required: "Name is required." })}
+						placeholder="Name"
+						type="text"
+					/>
+				)}
+				<p>{errors.name_input?.message}</p>
+				<input
+					{...register("email_input", { required: "Email is required." })}
+					placeholder="Email"
+					type="email"
+				/>
+				<input
+					{...register("password_input", {
+						required: "Password is required.",
+						minLength: {
+							value: 6,
+							message: "Password must be atleast 6 characters long!",
+						},
+					})}
+					placeholder="Password"
+					type="password"
+				/>
+				{!isLogin && (
+					<input
+						{...register("confirm_password_input", {
+							required: "Confirmed Password is required.",
+							minLength: {
+								value: 6,
+								message: "Password must be atleast 6 characters long!",
+							},
+						})}
+						placeholder="Confirm Password"
+						type="password"
+					/>
+				)}
+				<button type="submit">SUBMIT</button>
+			</form>
+			{/* <form onSubmit={onSubmitHandler}>
 				{!isLogin && (
 					<InputBar name="name_input" placeHolder="Name" type="text" />
 				)}
@@ -38,7 +100,7 @@ function UserForm(props: UserFormProps) {
 					/>
 				)}
 				<button type="submit">SUBMIT</button>
-			</form>
+			</form> */}
 		</div>
 	);
 }
