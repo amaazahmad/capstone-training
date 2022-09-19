@@ -7,19 +7,13 @@ type UserFormProps = {
 function UserForm(props: UserFormProps) {
 	const { isLogin } = props;
 
-	const onSubmitHandler = (event: React.SyntheticEvent<HTMLFormElement>) => {
+	const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = event.currentTarget;
-		const formElements = form.elements as typeof form.elements & {
-			name_input?: { value: string };
-			email_input: { value: string };
-			password_input: { value: string };
-			confirm_password_input?: { value: string };
-		};
-		const name = formElements.name_input?.value;
-		const email = formElements.email_input.value;
-		const password = formElements.password_input.value;
-		const confirmPassword = formElements.confirm_password_input?.value;
+		const name = form.name_input.value;
+		const email = form.email_input.value;
+		const password = form.password_input.value;
+		const confirmPassword = form.confirm_password_input?.value;
 
 		console.log(name, email, password, confirmPassword);
 	};
