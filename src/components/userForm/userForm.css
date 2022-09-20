@@ -1,0 +1,53 @@
+.formContainer {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.formElement {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+}
+
+input {
+	box-sizing: border-box;
+	padding: 1rem 1rem 1rem 1rem;
+	margin: 0.5rem;
+	width: 100%;
+	border: 1px solid #a5a5a5;
+	font-family: "Lexend Deca";
+	font-style: normal;
+	color: #a5a5a5;
+	outline: 0;
+}
+
+input:focus {
+	color: #272727;
+	border: 1px solid #56cc6a;
+}
+
+button {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 1rem 1rem 1rem 1rem;
+	margin: 0.5rem;
+	background: #272727;
+	opacity: 0.3;
+	border: 0;
+	font-family: "Lexend Deca";
+	font-style: normal;
+	font-weight: 600;
+	color: white;
+}
+
+button:hover {
+	background: #272727;
+	opacity: 1;
+	cursor: pointer;
+}

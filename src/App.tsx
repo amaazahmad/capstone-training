@@ -6,7 +6,7 @@ import HomePage from "./pages/home/home.component"
 import {useNavigate} from "react-router-dom"
 
 import {useContext} from "react"
-import {UserContext} from "./contexts/user.context"
+import {UserContext} from "./context/user.context"
 
 import {Routes, Route} from "react-router-dom"
 

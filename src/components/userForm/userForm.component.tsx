@@ -5,6 +5,8 @@ import {
 import {useForm} from "react-hook-form"
 import {useNavigate} from "react-router-dom"
 
+import "./userForm.css"
+
 type UserFormProps = {
 	isLogin: boolean
 }
@@ -17,7 +19,7 @@ const UserForm = (props: UserFormProps) => {
 		register,
 		handleSubmit,
 		getValues,
-		formState: {errors},
+		//formState: {errors},
 	} = useForm({
 		defaultValues: {
 			name_input: "",
@@ -42,8 +44,8 @@ const UserForm = (props: UserFormProps) => {
 	})
 
 	return (
-		<div>
-			<form onSubmit={onSubmitHandler}>
+		<div className="formContainer">
+			<form className="formElement" onSubmit={onSubmitHandler}>
 				{!isLogin && (
 					<input
 						{...register("name_input", {required: "Name is required."})}
@@ -51,10 +53,9 @@ const UserForm = (props: UserFormProps) => {
 						type="text"
 					/>
 				)}
-				<p>{errors.name_input?.message}</p>
 				<input
 					{...register("email_input", {required: "Email is required."})}
-					placeholder="Email"
+					placeholder="Enter your email"
 					type="email"
 				/>
 				<input
@@ -65,7 +66,7 @@ const UserForm = (props: UserFormProps) => {
 							message: "Password must be atleast 6 characters long!",
 						},
 					})}
-					placeholder="Password"
+					placeholder="Enter your password"
 					type="password"
 				/>
 				{!isLogin && (
@@ -85,7 +86,7 @@ const UserForm = (props: UserFormProps) => {
 						type="password"
 					/>
 				)}
-				<button type="submit">SUBMIT</button>
+				<button type="submit">{isLogin ? "LOGIN" : "SUBMIT"}</button>
 			</form>
 			{/* <form onSubmit={onSubmitHandler}>
 				{!isLogin && (
