@@ -1,23 +1,23 @@
 import {
 	createUserAccount,
 	signInUser,
-} from "../../utils/firebase/firebase.utils";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+} from "../../utils/firebase/firebase.utils"
+import {useForm} from "react-hook-form"
+import {useNavigate} from "react-router-dom"
 
 type UserFormProps = {
-	isLogin: boolean;
-};
+	isLogin: boolean
+}
 
-function UserForm(props: UserFormProps) {
-	const { isLogin } = props;
-	const navigate = useNavigate();
+const UserForm = (props: UserFormProps) => {
+	const {isLogin} = props
+	const navigate = useNavigate()
 
 	const {
 		register,
 		handleSubmit,
 		getValues,
-		formState: { errors },
+		formState: {errors},
 	} = useForm({
 		defaultValues: {
 			name_input: "",
@@ -25,37 +25,35 @@ function UserForm(props: UserFormProps) {
 			password_input: "",
 			confirm_password_input: "",
 		},
-	});
-
-	console.log(errors.confirm_password_input);
+	})
 
 	const onSubmitHandler = handleSubmit(async (data) => {
-		const name = data.name_input;
-		const email = data.email_input;
-		const password = data.password_input;
-		const confirmPassword = data.confirm_password_input;
+		const name = data.name_input
+		const email = data.email_input
+		const password = data.password_input
+		const confirmPassword = data.confirm_password_input
 
-		console.log(name, email, password, confirmPassword);
-		let resp;
-		if (isLogin) resp = await signInUser(email, password);
-		else resp = await createUserAccount(email, password);
+		console.log(name, email, password, confirmPassword)
+		let resp
+		if (isLogin) resp = await signInUser(email, password)
+		else resp = await createUserAccount(email, password)
 
-		if (!(resp instanceof Error)) navigate("/home");
-	});
+		if (!(resp instanceof Error)) navigate("/home")
+	})
 
 	return (
 		<div>
 			<form onSubmit={onSubmitHandler}>
 				{!isLogin && (
 					<input
-						{...register("name_input", { required: "Name is required." })}
+						{...register("name_input", {required: "Name is required."})}
 						placeholder="Name"
 						type="text"
 					/>
 				)}
 				<p>{errors.name_input?.message}</p>
 				<input
-					{...register("email_input", { required: "Email is required." })}
+					{...register("email_input", {required: "Email is required."})}
 					placeholder="Email"
 					type="email"
 				/>
@@ -79,8 +77,8 @@ function UserForm(props: UserFormProps) {
 								message: "Password must be atleast 6 characters long!",
 							},
 							validate: (value) => {
-								const password_value = getValues("password_input");
-								return value === password_value || "The passwords do not match";
+								const password_value = getValues("password_input")
+								return value === password_value || "The passwords do not match"
 							},
 						})}
 						placeholder="Confirm Password"
@@ -109,7 +107,7 @@ function UserForm(props: UserFormProps) {
 				<button type="submit">SUBMIT</button>
 			</form> */}
 		</div>
-	);
+	)
 }
 
-export default UserForm;
+export default UserForm
