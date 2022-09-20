@@ -16,6 +16,7 @@ function UserForm(props: UserFormProps) {
 	const {
 		register,
 		handleSubmit,
+		getValues,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -25,6 +26,8 @@ function UserForm(props: UserFormProps) {
 			confirm_password_input: "",
 		},
 	});
+
+	console.log(errors.confirm_password_input);
 
 	const onSubmitHandler = handleSubmit(async (data) => {
 		const name = data.name_input;
@@ -74,6 +77,10 @@ function UserForm(props: UserFormProps) {
 							minLength: {
 								value: 6,
 								message: "Password must be atleast 6 characters long!",
+							},
+							validate: (value) => {
+								const password_value = getValues("password_input");
+								return value === password_value || "The passwords do not match";
 							},
 						})}
 						placeholder="Confirm Password"
