@@ -58,6 +58,25 @@ button:hover {
 	cursor: pointer;
 }
 
+.errorDisplayed {
+	color: red;
+	margin: 0;
+	padding: 0;
+	align-self: flex-start;
+	font-size: 16px;
+	font-family: "Lexend Deca";
+	align-self: flex-start;
+}
+
+.errorNotDisplayed {
+	margin: 0;
+	padding: 0;
+	align-self: flex-start;
+	color: white;
+	font-size: 16px;
+	font-family: "Lexend Deca";
+}
+
 @media (min-width: 640px) {
 	.formElement {
 		width: 100%;
@@ -76,7 +95,7 @@ button:hover {
 	input {
 		align-self: flex-start;
 		margin-left: 0px;
-		font-size: 16px;
+		font-size: 14px;
 		height: 48px;
 	}
 }
@@ -86,6 +105,11 @@ button:hover {
 		max-width: 600px;
 		height: 60px;
 		font-size: 20px;
+	}
+
+	.errorDisplayed,
+	.errorNotDisplayed {
+		font-size: 18px;
 	}
 
 	button {

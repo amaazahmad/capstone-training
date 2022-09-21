@@ -78,10 +78,10 @@
 }
 
 @media (min-width: 1024px) {
-	/* .loginContainer {
-		/* padding-left: 8rem;
-		padding-right: 8rem; 
-	} */
+	.loginContainer {
+		padding-left: 8rem;
+		padding-right: 8rem;
+	}
 
 	/* .leftImageContainer {
 		width: 37%;
