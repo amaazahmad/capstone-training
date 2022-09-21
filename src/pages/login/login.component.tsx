@@ -12,24 +12,8 @@ function LoginPage() {
 			</div>
 			<div className="loginContainer">
 				<div className="welcomeTextContainer">
-					<h1
-						style={{
-							fontFamily: "DM Serif Display",
-							margin: 0,
-							fontWeight: "300",
-						}}
-					>
-						Welcome
-					</h1>
-					<p
-						style={{
-							fontFamily: "Lexend Deca",
-							color: "rgba(165, 165, 165, 1)",
-							margin: 0,
-						}}
-					>
-						Let's log you in quickly
-					</p>
+					<h1 className="welcomeHeading">Welcome</h1>
+					<p className="welcomeSubHeading">Let's log you in quickly</p>
 				</div>
 				<UserForm isLogin={true} />
 				<p className="bottomText">

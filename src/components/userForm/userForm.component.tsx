@@ -49,7 +49,7 @@ const UserForm = (props: UserFormProps) => {
 				{!isLogin && (
 					<input
 						{...register("name_input", {required: "Name is required."})}
-						placeholder="Name"
+						placeholder="Enter your name"
 						type="text"
 					/>
 				)}
@@ -82,7 +82,7 @@ const UserForm = (props: UserFormProps) => {
 								return value === password_value || "The passwords do not match"
 							},
 						})}
-						placeholder="Confirm Password"
+						placeholder="Re-enter the above password"
 						type="password"
 					/>
 				)}

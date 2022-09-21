@@ -1,6 +1,30 @@
-.welcomeTextContainer {
+/* .welcomeTextContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
+} */
+
+.welcomeHeading {
+	font-size: 36px;
+	font-family: "DM Serif Display";
+	margin: 0;
+	font-weight: 300;
+}
+
+.welcomeSubHeading {
+	font-family: "Lexend Deca";
+	color: rgba(165, 165, 165, 1);
+	margin: 0;
+	font-size: 18px;
+}
+
+@media (min-width: 640px) {
+	.welcomeHeading {
+		font-size: 48px;
+	}
+
+	.welcomeSubHeading {
+		font-size: 24px;
+	}
 }
