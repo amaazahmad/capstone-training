@@ -25,10 +25,8 @@ input {
 	font-style: normal;
 	color: #272727;
 	outline: 0;
-	max-width: 600px;
-	height: 60px;
-	font-size: 16px;
 	line-height: 20px;
+	font-size: 16px;
 }
 
 input::placeholder {
@@ -51,7 +49,7 @@ button {
 	font-style: normal;
 	font-weight: 600;
 	color: white;
-	font-size: 20px;
+	font-size: 16px;
 }
 
 button:hover {
@@ -71,10 +69,27 @@ button:hover {
 		width: 180px;
 		align-self: flex-start;
 		margin-left: 0;
+		font-size: 16px;
+		height: 48px;
 	}
 
 	input {
 		align-self: flex-start;
 		margin-left: 0px;
+		font-size: 16px;
+		height: 48px;
+	}
+}
+
+@media (min-width: 1024px) {
+	input {
+		max-width: 600px;
+		height: 60px;
+		font-size: 20px;
+	}
+
+	button {
+		font-size: 20px;
+		height: 60px;
 	}
 }

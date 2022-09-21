@@ -21,7 +21,7 @@
 	font-style: normal;
 	font-weight: 400;
 	color: #272727;
-	font-size: 20px;
+	font-size: 16px;
 }
 
 .fullPageContainer {
@@ -78,10 +78,10 @@
 }
 
 @media (min-width: 1024px) {
-	.loginContainer {
+	/* .loginContainer {
 		/* padding-left: 8rem;
-		padding-right: 8rem; */
-	}
+		padding-right: 8rem; 
+	} */
 
 	/* .leftImageContainer {
 		width: 37%;
@@ -90,4 +90,7 @@
 	.loginContainer {
 		width: 63%;
 	} */
+	.bottomText {
+		font-size: 20px;
+	}
 }

@@ -21,6 +21,15 @@
 
 @media (min-width: 640px) {
 	.welcomeHeading {
+		font-size: 36px;
+	}
+	.welcomeSubHeading {
+		font-size: 18px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.welcomeHeading {
 		font-size: 48px;
 	}
 

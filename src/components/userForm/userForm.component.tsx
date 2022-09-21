@@ -82,7 +82,7 @@ const UserForm = (props: UserFormProps) => {
 								return value === password_value || "The passwords do not match"
 							},
 						})}
-						placeholder="Re-enter the above password"
+						placeholder="Re-enter the password"
 						type="password"
 					/>
 				)}
