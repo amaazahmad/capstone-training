@@ -1,5 +1,6 @@
-import firebase from "firebase/auth"
 import {createContext} from "react"
+
+import firebase from "firebase/auth"
 
 type UserContextType = {
 	currentUser: firebase.User | null

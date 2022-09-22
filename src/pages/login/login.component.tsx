@@ -1,7 +1,7 @@
-import UserForm from "../../components/userForm/userForm.component"
 import {Link} from "react-router-dom"
+import UserForm from "../../components/userForm/userForm.component"
 
-function LoginPage() {
+const LoginPage = () => {
 	return (
 		<div className="flex flex-row">
 			<div className="hidden sm:flex sm:bg-form-sidebar sm:flex-row sm:justify-center sm:items-center sm:bg-cover w-[37%]">

@@ -1,12 +1,13 @@
-import {signOutUser} from "../../utils/firebase/firebase.utils"
 import {useNavigate} from "react-router-dom"
 
-function HomePage() {
+import {signOutUser} from "../../utils/firebase/firebase.utils"
+
+const HomePage = () => {
 	const navigate = useNavigate()
 	const signOutHandler = () => {
-		const resp = signOutUser()
+		const response = signOutUser()
 
-		if (!(resp instanceof Error)) navigate("/login")
+		if (!(response instanceof Error)) navigate("/login")
 	}
 	return (
 		<div>
