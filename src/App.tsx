@@ -12,15 +12,30 @@ import {Routes, Route} from "react-router-dom"
 
 function App() {
 	const currentUser = useContext(UserContext)?.currentUser
-
+	//const currentUser = getAuth().currentUser
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		const path = currentUser ? "/" : "/login"
-		console.log("PATH CHANGED TO: ", path)
-		navigate(path)
+	useEffect(
+		() => {
+			console.log("CURRENT USER: ", currentUser)
+			const path = currentUser ? "/" : "/login"
+			// console.log("PATH CHANGED TO: ", path)
+			navigate(path)
+		},
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentUser])
+		[currentUser]
+	)
+
+	// useEffect(() => {
+	// 	console.log("SECOND USE EFFECT")
+	// 	const getUser = async () => {
+	// 		await getAuth().currentUser
+	// 		setUserRetrieved(true)
+	// 	}
+	// 	getUser()
+	// })
+
 	return (
 		<div className="App">
 			<Routes>
