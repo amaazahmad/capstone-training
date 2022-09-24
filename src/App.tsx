@@ -1,32 +1,32 @@
 // React Imports
-import React, {useEffect, useContext} from "react"
+import React, {useEffect} from "react"
 
 //third party packages
 import {Routes, Route, useNavigate} from "react-router-dom"
+import {onAuthStateChanged, getAuth} from "firebase/auth"
 
 //components
 import LoginPage from "./pages/login/login.component"
 import SignupPage from "./pages/signup/signup.component"
 import HomePage from "./pages/home/home.component"
 
-//contexts
-import {UserContext} from "./context/user.context"
-
 //styles
 import "./App.css"
 
 function App() {
-	const currentUser = useContext(UserContext)?.currentUser
 	const navigate = useNavigate()
 
 	useEffect(
 		() => {
-			const path = currentUser ? "/" : "/login"
-			navigate(path)
+			const auth = getAuth()
+			onAuthStateChanged(auth, (user) => {
+				const path = user ? "/" : "/login"
+				navigate(path)
+			})
 		},
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[currentUser]
+		[]
 	)
 
 	return (
