@@ -1,7 +1,78 @@
-import {Link} from "react-router-dom"
-import UserForm from "../../components/userForm/userForm.component"
+// third party packes
+import {useNavigate, Link} from "react-router-dom"
+
+//components
+import Form from "../../components/form/form.component"
+
+//utils
+import {createUserAccount} from "../../utils/firebase/firebase.utils"
 
 const SignupPage = () => {
+	const navigate = useNavigate()
+
+	const SignupFormFields = [
+		{
+			name: "name",
+			type: "text",
+			required: "Name is required.",
+		},
+		{
+			name: "email",
+			type: "text",
+			required: "Email is required.",
+			pattern: {
+				value:
+					/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+				message: "Invalid email",
+			},
+		},
+		{
+			name: "password",
+			required: "Password is required",
+			minLength: {
+				value: 6,
+				message: "Password must be atleast 6 characters long.",
+			},
+			type: "password",
+		},
+		{
+			name: "confirmPassword",
+			required: "Confirmed password is required.",
+			minLength: {
+				value: 6,
+				message: "Password must be atleast 6 characters long.",
+			},
+			validate: (password: string, confirmPassword: string) => {
+				return password === confirmPassword || "The passwords do not match."
+			},
+			type: "password",
+		},
+	]
+
+	type DataType = {
+		name: string
+		email: string
+		password: string
+		confirmPassword: string
+	}
+
+	const onSubmitHandler = async (data: DataType) => {
+		const email = data.email
+		const password = data.password
+
+		const userResponse = await createUserAccount(email, password)
+
+		if (userResponse instanceof Error) {
+			if (userResponse.message.includes("too-many-requests"))
+				return "Too many failed attempts. Try again later."
+			else if (userResponse.message.includes("email-already-in-use")) {
+				return "User already exists."
+			} else {
+				return userResponse.message
+			}
+		} else navigate("/")
+	}
+
 	return (
 		<div className="flex flex-row">
 			<div className="hidden sm:flex sm:bg-form-sidebar sm:flex-row sm:justify-center sm:items-center sm:bg-cover w-[37%]">
@@ -18,7 +89,11 @@ const SignupPage = () => {
 						Let's sign you up quickly
 					</p>
 				</div>
-				<UserForm isLogin={false} />
+				<Form
+					fields={SignupFormFields}
+					buttonText="SUBMIT"
+					onSubmitHandler={onSubmitHandler}
+				></Form>
 
 				<p className="m-0 not-italic font-normal text-bottom-text-color text-base font-lexend-deca lg:text-xl">
 					Already have an account?

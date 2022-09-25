@@ -20,7 +20,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({
 
 	useEffect(() => {
 		const unsubscribeFunc = onAuthStateChanged(auth, (firebaseUser) => {
-			//console.log("USER FROM FIREBASE: ", firebaseUser)
 			setCurrentUser(firebaseUser)
 		})
 		return unsubscribeFunc
