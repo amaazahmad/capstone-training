@@ -1,4 +1,7 @@
+import {useState} from "react"
+
 // third party packes
+import {FieldValues} from "react-hook-form"
 import {useNavigate, Link} from "react-router-dom"
 
 //components
@@ -9,6 +12,7 @@ import {createUserAccount} from "../../utils/firebase/firebase.utils"
 
 const SignupPage = () => {
 	const navigate = useNavigate()
+	const [errorMessage, setErrorMessage] = useState<string | null>()
 
 	const SignupFormFields = [
 		{
@@ -42,33 +46,30 @@ const SignupPage = () => {
 				value: 6,
 				message: "Password must be atleast 6 characters long.",
 			},
-			validate: (password: string, confirmPassword: string) => {
-				return password === confirmPassword || "The passwords do not match."
-			},
 			type: "password",
 		},
 	]
 
-	type DataType = {
-		name: string
-		email: string
-		password: string
-		confirmPassword: string
-	}
-
-	const onSubmitHandler = async (data: DataType) => {
+	const onSubmitHandler = async (data: FieldValues) => {
+		setErrorMessage(null)
 		const email = data.email
 		const password = data.password
+		const confirmPassword = data.confirmPassword
+
+		if (password !== confirmPassword) {
+			setErrorMessage("Passwords do not match.")
+			return
+		}
 
 		const userResponse = await createUserAccount(email, password)
 
 		if (userResponse instanceof Error) {
 			if (userResponse.message.includes("too-many-requests"))
-				return "Too many failed attempts. Try again later."
+				setErrorMessage("Too many failed attempts. Try again later.")
 			else if (userResponse.message.includes("email-already-in-use")) {
-				return "User already exists."
+				setErrorMessage("User already exists.")
 			} else {
-				return userResponse.message
+				setErrorMessage(userResponse.message)
 			}
 		} else navigate("/")
 	}
@@ -89,11 +90,16 @@ const SignupPage = () => {
 						Let's sign you up quickly
 					</p>
 				</div>
-				<Form
-					fields={SignupFormFields}
-					buttonText="SUBMIT"
-					onSubmitHandler={onSubmitHandler}
-				></Form>
+				<div className="w-full">
+					<Form
+						fields={SignupFormFields}
+						buttonText="SUBMIT"
+						onSubmitHandler={onSubmitHandler}
+					></Form>
+					<p className="m-0 mt-0.5 p-0 text-left self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
+						{errorMessage}
+					</p>
+				</div>
 
 				<p className="m-0 not-italic font-normal text-bottom-text-color text-base font-lexend-deca lg:text-xl">
 					Already have an account?

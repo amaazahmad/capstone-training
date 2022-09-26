@@ -1,4 +1,7 @@
+import React, {useState} from "react"
+
 //third party imports
+import {FieldValues} from "react-hook-form"
 import {useNavigate, Link} from "react-router-dom"
 
 //components
@@ -9,6 +12,8 @@ import {signInUser} from "../../utils/firebase/firebase.utils"
 
 const LoginPage = () => {
 	const navigate = useNavigate()
+
+	const [errorMessage, setErrorMessage] = useState<string | null>()
 
 	const LoginFormFields = [
 		{
@@ -32,12 +37,8 @@ const LoginPage = () => {
 		},
 	]
 
-	type DataType = {
-		email: string
-		password: string
-	}
-
-	const onSubmitHandler = async (data: DataType) => {
+	const onSubmitHandler = async (data: FieldValues) => {
+		setErrorMessage(null)
 		const email = data.email
 		const password = data.password
 
@@ -45,13 +46,15 @@ const LoginPage = () => {
 
 		if (userResponse instanceof Error) {
 			if (userResponse.message.includes("too-many-requests"))
-				return "Too many failed attempts to login to this account. Try again later."
+				setErrorMessage(
+					"Too many failed attempts to login to this account. Try again later."
+				)
 			else if (userResponse.message.includes("wrong-password"))
-				return "Incorrect password."
+				setErrorMessage("Incorrect password.")
 			else if (userResponse.message.includes("user-not-found")) {
-				return "User not found"
+				setErrorMessage("User not found.")
 			} else {
-				return userResponse.message
+				setErrorMessage(userResponse.message)
 			}
 		} else navigate("/")
 	}
@@ -72,11 +75,16 @@ const LoginPage = () => {
 						Let's log you in quickly
 					</p>
 				</div>
-				<Form
-					fields={LoginFormFields}
-					buttonText="LOGIN"
-					onSubmitHandler={onSubmitHandler}
-				></Form>
+				<div className="w-full">
+					<Form
+						fields={LoginFormFields}
+						buttonText="LOGIN"
+						onSubmitHandler={onSubmitHandler}
+					></Form>
+					<p className="m-0 mt-0.5 p-0 text-left self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
+						{errorMessage}
+					</p>
+				</div>
 				<p className="m-0 not-italic font-normal text-bottom-text-color text-base font-lexend-deca lg:text-xl">
 					Don't have an account?
 					<Link className=" no-underline text-green-text-color" to="../signup">
