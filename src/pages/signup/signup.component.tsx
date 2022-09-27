@@ -52,6 +52,7 @@ const SignupPage = () => {
 
 	const onSubmitHandler = async (data: FieldValues) => {
 		setErrorMessage(null)
+		const name = data.name
 		const email = data.email
 		const password = data.password
 		const confirmPassword = data.confirmPassword
@@ -60,9 +61,9 @@ const SignupPage = () => {
 			setErrorMessage("Passwords do not match.")
 			return
 		}
-
-		const userResponse = await createUserAccount(email, password)
-
+		console.log(typeof email)
+		const userResponse = await createUserAccount(name,email, password)
+		
 		if (userResponse instanceof Error) {
 			if (userResponse.message.includes("too-many-requests"))
 				setErrorMessage("Too many failed attempts. Try again later.")

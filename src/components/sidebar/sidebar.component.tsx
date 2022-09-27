@@ -1,5 +1,11 @@
+//react imports
+import { useContext } from "react"
+
 //third party packages
 import { Outlet, useNavigate } from "react-router-dom"
+
+//contexts
+import { UserContext } from "../../context/user.context"
 
 //utils
 import { signOutUser } from "../../utils/firebase/firebase.utils"
@@ -9,6 +15,8 @@ import "./sidebar.styles.css"
 
 const Sidebar = () => {
 	const navigate = useNavigate();
+	const user = useContext(UserContext);
+	const displayName = user?.currentUser?.displayName
 	const signOutHandler = () => {
 		const response = signOutUser()
 
@@ -26,8 +34,8 @@ const Sidebar = () => {
 			<div className="sidebar-container">
 				<div style={{position:'relative', cursor:'pointer'}} className="sidebar-icon-container" onClick={userIconClickHandler}>
 					<img className="sidebar-icon sidebar-user-icon" src="/assets/icons/ellipse.svg" alt=""></img>
-					<span className="sidebar-usericon-text">U</span>
-					<p className=" sidebar-text sidebar-username-text">ABCEFFF</p>
+					<span className="sidebar-usericon-text">{displayName?.slice(0,1).toUpperCase()}</span>
+					<p className=" sidebar-text sidebar-username-text">{displayName}</p>
 				</div>
 				
 

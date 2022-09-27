@@ -1,9 +1,10 @@
-import {initializeApp} from "firebase/app"
-import {
+import {initializeApp,} from "firebase/app"
+import firebase,{
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	getAuth,
 	signOut,
+	updateProfile
 } from "firebase/auth"
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,10 +18,11 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig)
 export const auth = getAuth(firebaseApp)
 
-export const createUserAccount = async (email: string, password: string) => {
+export const createUserAccount = async (name:string, email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password)
-		.then((userObjInResponse) => {
-			return userObjInResponse
+		.then(async (userObjInResponse) => {
+			await updateProfile(userObjInResponse.user,{displayName:name})
+			return userObjInResponse;
 		})
 		.catch((error) => {
 			return error
