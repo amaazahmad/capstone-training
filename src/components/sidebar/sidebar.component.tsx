@@ -54,7 +54,7 @@ const Sidebar = () => {
 				
 			</div>
 			
-			<div className="overflow-scroll top-0 h-[93%] xl:w-[92%]">
+			<div className="overflow-scroll top-0 h-[100%] xl:w-[92%]">
 			<Outlet/>
 			</div>
 		</div>
