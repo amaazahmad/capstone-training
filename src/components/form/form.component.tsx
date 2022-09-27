@@ -72,8 +72,8 @@ const Form = ({fields, buttonText, onSubmitHandler}: FormProps) => {
 					)
 				})}
 				<button
-					className="box-border w-full bg-bottom-text-color opacity-100 border border-white font-lexend-deca not-italic font-semibold text-white text-base p-4 ml-0
-                    hover:text-bottom-text-color hover:bg-white hover:border hover:border-solid hover:border-bottom-text-color hover:cursor-pointer
+					className="box-border w-full bg-dark-gray-text-color opacity-100 border border-white font-lexend-deca not-italic font-semibold text-white text-base p-4 ml-0
+                    hover:text-dark-gray-text-color hover:bg-white hover:border hover:border-solid hover:border-dark-gray-text-color hover:cursor-pointer
                     sm:h-[60px] sm:w-48 sm:self-start sm:text-[16px] 
                     lg:h-16 lg:text-[20px]"
 					type="submit"

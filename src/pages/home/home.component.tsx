@@ -10,7 +10,6 @@ import BlogList from "../../components/blogList/blogList"
 //utils
 import {getBlogs} from "../../utils/firebase/firebaseDB.utils"
 
-import "./home.styles.css"
 
 const HomePage = () => {
 
@@ -29,9 +28,9 @@ const HomePage = () => {
 	}, [])
 
 	return (
-		<div className="homepage-container">
-			<img className="dash-icon" src="/assets/icons/rectangle.svg" alt=""></img>
-			<h1 className="page-heading">Latest</h1>
+		<div className=" mt-24 flex flex-col justify-center items-center ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl">
+			<img className="w-5 md:ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
+			<h1 className="font-lexend-deca font-normal text-xl leading-6 text-dark-gray-text-color md:ml-8">Latest</h1>
 			<BlogList blogs={blogs} />
 		</div>
 	)

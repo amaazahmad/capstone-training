@@ -27,13 +27,13 @@ const BlogList = ({blogs}: BlogListProps) => {
 	}, [blogs?.length])
 
 	return (
-		<div style={{"marginBottom":"20px"}}>
+		<div className="mb-5">
 			{blogs?.length ? (
 				blogs?.map((blog) => {
 					return <BlogListEntry key={blog.title} blog={blog} />
 				})
 			) : (
-				<p style={{fontFamily:'Lexend Deca', paddingLeft:'2rem', paddingTop:'2rem', fontSize:'20px', fontWeight:'400'}}>{pageState}</p>
+				<p className="pl-8 pt-8 text-xl font-normal font-lexend-deca box-border">{pageState}</p>
 			)}
 		</div>
 	)

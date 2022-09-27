@@ -35,9 +35,9 @@ const MyBlogs = () => {
 	}, [email])
 
 	return (
-		<div className="homepage-container">
-			<img className="dash-icon" src="/assets/icons/rectangle.svg" alt=""></img>
-			<h1 className="page-heading">My Blogs</h1>
+		<div className=" mt-24 flex flex-col justify-center items-center ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl">
+			<img className="w-5 md:ml-8" src="/assets/icons/rectangle.svg" alt=""></img>
+			<h1 className="font-lexend-deca font-normal text-xl leading-6 text-dark-gray-text-color md:ml-8">My Blogs</h1>
 			<BlogList blogs={blogs} />
 		</div>
 	)

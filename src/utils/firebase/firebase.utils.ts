@@ -1,5 +1,5 @@
 import {initializeApp,} from "firebase/app"
-import firebase,{
+import{
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	getAuth,

@@ -102,7 +102,7 @@ const SignupPage = () => {
 					</p>
 				</div>
 
-				<p className="m-0 not-italic font-normal text-bottom-text-color text-base font-lexend-deca lg:text-xl">
+				<p className="m-0 not-italic font-normal text-dark-gray-text-color text-base font-lexend-deca lg:text-xl">
 					Already have an account?
 					<Link className=" no-underline text-green-text-color" to="../login">
 						{" Log-in"}

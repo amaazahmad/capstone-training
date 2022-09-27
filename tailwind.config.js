@@ -11,12 +11,14 @@ module.exports = {
 			colors: {
 				"dark-gray-text-color": "rgba(39, 39, 39, 1)",
 				"secondary-text-color": "rgba(165, 165, 165, 1)",
-				"bottom-text-color": "rgba(39, 39, 39, 1)", // #272727
 				"green-text-color": "rgba(86, 204, 106, 1)",
 			},
 			backgroundImage: {
 				"form-sidebar": "url(../public/assets/images/form-background.png)",
 			},
+			boxShadow:{
+				"sidebar-box-shadow":"0px 0px 50px 5px rgba(128, 128, 128, 1)",
+			}
 		},
 	},
 	plugins: [],
