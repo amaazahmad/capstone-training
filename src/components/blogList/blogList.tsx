@@ -1,8 +1,8 @@
 //react imports
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 
 // third party packes
-import {DocumentData} from "firebase/firestore"
+import { DocumentData } from "firebase/firestore"
 
 //components
 import BlogListEntry from "../blogListEntry/blogListEntry"
@@ -11,11 +11,11 @@ type BlogListProps = {
 	blogs: DocumentData[] | null
 }
 
-const BlogList = ({blogs}: BlogListProps) => {
+const BlogList = ({ blogs }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
 
 	useEffect(() => {
-		
+
 		if (pageState === null) {
 			setPageState("Loading articles. Hold on.")
 		} else {

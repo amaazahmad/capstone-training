@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 
 //third party
-import firebase, {onAuthStateChanged} from "firebase/auth"
+import firebase, { onAuthStateChanged } from "firebase/auth"
 
 //contexts
-import {UserContext} from "./user.context"
+import { UserContext } from "./user.context"
 
 //utils
-import {auth} from "../utils/firebase/firebase.utils"
+import { auth } from "../utils/firebase/firebase.utils"
 
 type UserProviderProps = {
 	children: React.ReactNode
@@ -26,7 +26,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({
 	}, [])
 
 	return (
-		<UserContext.Provider value={{currentUser, setCurrentUser}}>
+		<UserContext.Provider value={{ currentUser, setCurrentUser }}>
 			{children}
 		</UserContext.Provider>
 	)

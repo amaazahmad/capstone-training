@@ -1,14 +1,14 @@
-import {useState} from "react"
+import { useState } from "react"
 
 // third party packes
-import {FieldValues} from "react-hook-form"
-import {useNavigate, Link} from "react-router-dom"
+import { FieldValues } from "react-hook-form"
+import { useNavigate, Link } from "react-router-dom"
 
 //components
 import Form from "../../components/form/form.component"
 
 //utils
-import {createUserAccount} from "../../utils/firebase/firebase.utils"
+import { createUserAccount } from "../../utils/firebase/firebase.utils"
 
 const SignupPage = () => {
 	const navigate = useNavigate()
@@ -62,8 +62,8 @@ const SignupPage = () => {
 			return
 		}
 		console.log(typeof email)
-		const userResponse = await createUserAccount(name,email, password)
-		
+		const userResponse = await createUserAccount(name, email, password)
+
 		if (userResponse instanceof Error) {
 			if (userResponse.message.includes("too-many-requests"))
 				setErrorMessage("Too many failed attempts. Try again later.")

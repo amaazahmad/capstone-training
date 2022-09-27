@@ -1,14 +1,14 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 //third party imports
-import {FieldValues} from "react-hook-form"
-import {useNavigate, Link} from "react-router-dom"
+import { FieldValues } from "react-hook-form"
+import { useNavigate, Link } from "react-router-dom"
 
 //components
 import Form from "../../components/form/form.component"
 
 //utils
-import {signInUser} from "../../utils/firebase/firebase.utils"
+import { signInUser } from "../../utils/firebase/firebase.utils"
 
 const LoginPage = () => {
 	const navigate = useNavigate()

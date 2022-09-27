@@ -1,6 +1,6 @@
 import React from "react"
 
-import {FieldValues, useForm} from "react-hook-form"
+import { FieldValues, useForm } from "react-hook-form"
 
 type FormFields = {
 	name: string
@@ -22,11 +22,11 @@ type FormProps = {
 	onSubmitHandler: (data: FieldValues) => {}
 }
 
-const Form = ({fields, buttonText, onSubmitHandler}: FormProps) => {
+const Form = ({ fields, buttonText, onSubmitHandler }: FormProps) => {
 	const {
 		register,
 		handleSubmit,
-		formState: {errors, isSubmitting},
+		formState: { errors, isSubmitting },
 	} = useForm()
 
 	return (
@@ -61,8 +61,8 @@ const Form = ({fields, buttonText, onSubmitHandler}: FormProps) => {
 								}
 								{...register(field.name, {
 									required: field.required,
-									pattern: {...patternObj},
-									minLength: {...minLengthObj},
+									pattern: { ...patternObj },
+									minLength: { ...minLengthObj },
 								})}
 							></input>
 							<p className="m-0 p-0 self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
