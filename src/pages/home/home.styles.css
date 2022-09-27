@@ -1,0 +1,36 @@
+.homepage-container {
+ margin-top: 89px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+
+}
+
+.dash-icon{
+	width:20px
+}
+
+.page-heading{
+	font-family: 'Lexend Deca';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 25px;
+	color: #272727;
+}
+
+@media screen and (min-width:768px){
+	.homepage-container{
+		align-items: flex-start;
+	}
+
+	.dash-icon{
+
+		margin-left: 2rem;
+	}
+
+	.page-heading{
+		padding-left: 2rem;
+	}
+}

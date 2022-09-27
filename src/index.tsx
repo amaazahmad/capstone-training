@@ -10,11 +10,11 @@ import {UserProvider} from "./context/user.provider"
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<UserProvider>
-				<App />
-			</UserProvider>
-		</BrowserRouter>
+	<BrowserRouter>
+		<UserProvider>
+			<App />
+		</UserProvider>
+	</BrowserRouter>
 	</React.StrictMode>
 )
 

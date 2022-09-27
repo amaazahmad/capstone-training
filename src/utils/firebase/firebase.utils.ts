@@ -14,8 +14,8 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_FIREBASE_APP_ID,
 }
 
-const firebaseAapp = initializeApp(firebaseConfig)
-export const auth = getAuth(firebaseAapp)
+export const firebaseApp = initializeApp(firebaseConfig)
+export const auth = getAuth(firebaseApp)
 
 export const createUserAccount = async (email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password)

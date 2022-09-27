@@ -1,0 +1,106 @@
+.entry-container {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 0.5rem;
+}
+
+.entry-title{
+	
+font-family: 'DM Serif Display';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 33px;
+color: #56CC6A;
+margin-bottom: 10px;
+margin-top: 0;
+cursor:pointer
+}
+
+
+.entry-date{
+	font-family: 'Lexend Deca';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+
+	color: #272727;
+}
+
+.entry-content{
+	
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+
+color: #272727;
+margin-bottom: 11px;
+margin-top: 0;
+
+}
+
+.entry-email{
+	font-family: 'Lexend Deca';
+	font-style: normal;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 20px;
+	color: #A5A5A5;
+}
+
+.read-more{
+	font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+
+color: #56CC6A;
+cursor: pointer;
+}
+
+.date-email-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+@media screen and (min-width:768px){
+	
+	.entry-date{
+		font-size: 24px;
+		line-height: 30px;
+
+	}
+
+	.entry-title{
+		font-size: 32px;
+		line-height: 44px;
+	}
+
+	.entry-content, .read-more{
+		font-size: 20px;
+		line-height: 25px;
+	}
+	
+
+}
+
+@media screen and (min-width:1280px) {
+	.entry-title{
+		margin-top: 10px;
+		margin-bottom: 15px;
+	}
+
+	.entry-email{
+		margin-top: 15px;
+	}
+}

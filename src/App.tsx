@@ -9,6 +9,7 @@ import {onAuthStateChanged, getAuth} from "firebase/auth"
 import SignupPage from "./pages/signup/signup.component"
 import LoginPage from "./pages/login/login.component"
 import HomePage from "./pages/home/home.component"
+import Sidebar from "./components/sidebar/sidebar.component"
 
 //styles
 import "./App.css"
@@ -33,9 +34,12 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
+				<Route path='/' element={<Sidebar/>}>
+					<Route index={true} element={<HomePage />}/>
+				</Route>
+
 				<Route path="/login" element={<LoginPage />}></Route>
 				<Route path="/signup" element={<SignupPage />}></Route>
-				<Route path="/" element={<HomePage />}></Route>
 			</Routes>
 		</div>
 	)

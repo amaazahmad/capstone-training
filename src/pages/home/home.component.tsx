@@ -1,18 +1,37 @@
-import {useNavigate} from "react-router-dom"
+//react imports
+import {useEffect, useState} from "react"
 
-import {signOutUser} from "../../utils/firebase/firebase.utils"
+//third party packes
+import {DocumentData} from "firebase/firestore"
+
+//components
+import BlogList from "../../components/blogList/blogList"
+
+//utils
+import {getBlogs} from "../../utils/firebase/firebaseDB.utils"
+
+import "./home.styles.css"
 
 const HomePage = () => {
-	const navigate = useNavigate()
-	const signOutHandler = () => {
-		const response = signOutUser()
 
-		if (!(response instanceof Error)) navigate("/login")
-	}
+	const [blogs, setBlogs] = useState<DocumentData[] | null>(null)
+
+	useEffect(() => {
+		
+		const getBlogsAtHomePage = async () => {
+			const blogs = await getBlogs()
+			blogs.sort((objA, objB) => {return Number(objB.date) - Number(objA.date)})
+			//const blogs: DocumentData[] = []   empty array for testing
+			setBlogs(blogs)
+		}
+		getBlogsAtHomePage()
+	}, [])
+
 	return (
-		<div>
-			<h1>Home Page</h1>
-			<button onClick={signOutHandler}>SIGN OUT</button>
+		<div className="homepage-container">
+			<img className="dash-icon" src="/assets/icons/rectangle.svg" alt=""></img>
+			<h1 className="page-heading">Latest</h1>
+			<BlogList blogs={blogs} />
 		</div>
 	)
 }
