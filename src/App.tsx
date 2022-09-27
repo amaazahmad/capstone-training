@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// React Imports
+import React, {useEffect} from "react"
+
+//third party packages
+import {Routes, Route, useNavigate} from "react-router-dom"
+import {onAuthStateChanged, getAuth} from "firebase/auth"
+
+//components
+import SignupPage from "./pages/signup/signup.component"
+import LoginPage from "./pages/login/login.component"
+import HomePage from "./pages/home/home.component"
+
+//styles
+import "./App.css"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const navigate = useNavigate()
+
+	useEffect(
+		() => {
+			// the onAuthStateChanged function is used here instead of getting the current user from context because it had a delay. The login screen flashed each time a logged-in user refreshed the home page. The usage of onAuthStateChanged fixes it.
+			const auth = getAuth()
+			onAuthStateChanged(auth, (user) => {
+				const path = user ? "/" : "/login"
+				navigate(path)
+			})
+		},
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	)
+
+	return (
+		<div className="App">
+			<Routes>
+				<Route path="/login" element={<LoginPage />}></Route>
+				<Route path="/signup" element={<SignupPage />}></Route>
+				<Route path="/" element={<HomePage />}></Route>
+			</Routes>
+		</div>
+	)
 }
 
-export default App;
+export default App
