@@ -4,7 +4,8 @@
  flex-direction: column;
  justify-content: center;
  align-items: center;
-
+ margin-left: 1rem;
+ margin-right: 1rem;
 }
 
 .dash-icon{
@@ -32,5 +33,12 @@
 
 	.page-heading{
 		padding-left: 2rem;
+	}
+}
+
+@media screen and (min-width:1280px) {
+	.homepage-container{
+		max-width: 1400px;
+		margin-left: 4rem;
 	}
 }

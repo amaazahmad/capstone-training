@@ -10,6 +10,7 @@ import SignupPage from "./pages/signup/signup.component"
 import LoginPage from "./pages/login/login.component"
 import HomePage from "./pages/home/home.component"
 import Sidebar from "./components/sidebar/sidebar.component"
+import MyBlogs from "./pages/myBlogs/myBlogs"
 
 //styles
 import "./App.css"
@@ -36,8 +37,9 @@ function App() {
 			<Routes>
 				<Route path='/' element={<Sidebar/>}>
 					<Route index={true} element={<HomePage />}/>
+					<Route path="my-blogs" element={<MyBlogs />}/>
 				</Route>
-
+				
 				<Route path="/login" element={<LoginPage />}></Route>
 				<Route path="/signup" element={<SignupPage />}></Route>
 			</Routes>

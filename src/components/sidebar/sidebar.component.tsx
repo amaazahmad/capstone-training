@@ -16,11 +16,15 @@ const Sidebar = () => {
 		
 	}
 
+	const userIconClickHandler = () => {
+		navigate('/my-blogs');
+	}
+
 	return (
 		<div className="full-container">
 			
 			<div className="sidebar-container">
-				<div style={{position:'relative'}} className="sidebar-icon-container">
+				<div style={{position:'relative', cursor:'pointer'}} className="sidebar-icon-container" onClick={userIconClickHandler}>
 					<img className="sidebar-icon sidebar-user-icon" src="/assets/icons/ellipse.svg" alt=""></img>
 					<span className="sidebar-usericon-text">U</span>
 					<p className=" sidebar-text sidebar-username-text">ABCEFFF</p>

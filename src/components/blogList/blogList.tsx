@@ -15,6 +15,7 @@ const BlogList = ({blogs}: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
 
 	useEffect(() => {
+		
 		if (pageState === null) {
 			setPageState("Loading articles. Hold on.")
 		} else {
