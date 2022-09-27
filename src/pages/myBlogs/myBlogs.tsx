@@ -24,14 +24,14 @@ const MyBlogs = () => {
 
 	useEffect(() => {
 		
-		const getBlogsAtHomePage = async () => {
+		const getBlogsList = async () => {
 			const blogs = await getBlogs(email)
 			blogs.sort((objA, objB) => {return Number(objB.date) - Number(objA.date)})
 			
 			setBlogs(blogs)
 		}
           
-		getBlogsAtHomePage()
+		getBlogsList()
 	}, [email])
 
 	return (
