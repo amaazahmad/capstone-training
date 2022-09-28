@@ -1,11 +1,15 @@
 //react imports
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, useContext } from "react"
 
 //third party packes
 import { useOutletContext } from "react-router-dom"
+import Switch from "react-switch";
 
 //components
 import BlogList from "../../components/blogList/blogList"
+
+//contexts
+import { ThemeContext } from "../../context/theme/theme.context"
 
 //utils
 import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
@@ -21,23 +25,23 @@ const HomePage = () => {
 		date: Date
 	}
 
-	// const [blogs, setBlogs] = useState<DocumentData[] | null>(null)
-	const [blogs, setBlogs] = useState<BlogData[] | null>(null)
+
+	const { theme, setTheme } = useContext(ThemeContext);
+	const [, setBlogs] = useState<BlogData[] | null>(null)
 	const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
 	const refSearchBar = useRef<HTMLInputElement>(null);
 
-	// const { searchBarVisible, setSearchBarVisible } = useSearchBarOutletContext();
 	type OutletContextType = [
 		searchBarVisible: boolean,
 		setSearchBarVisible: (visible: boolean) => {}
 	]
 	const [searchBarVisible, setSearchBarVisible] = useOutletContext<OutletContextType>()
 
-	const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const searchField = event.target.value.toLowerCase()
-		const filteredBlogs = blogs ? blogs.filter((blog) => { return blog.title.toLowerCase().includes(searchField) }) : blogs
-		setFilteredBlogs(filteredBlogs);
-	}
+	// const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+	// 	const searchField = event.target.value.toLowerCase()
+	// 	const filteredBlogs = blogs ? blogs.filter((blog) => { return blog.title.toLowerCase().includes(searchField) }) : blogs
+	// 	setFilteredBlogs(filteredBlogs);
+	// }
 
 	useEffect(() => {
 
@@ -72,11 +76,23 @@ const HomePage = () => {
 		}
 	}
 
+	const themeChangeHandler = () => {
+		localStorage.setItem('theme', !theme ? "dark" : "light")
+		setTheme((!theme))
+	}
+
 	return (
-		<div className=" mt-24 flex flex-col justify-center items-center ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl" onClick={outsideClickHandler}>
-			<img className="w-5 md:ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
-			<h1 className="font-lexend-deca font-normal text-xl leading-6 text-dark-gray-text-color md:ml-8">Latest</h1>
-			<input ref={refSearchBar} className={searchBarVisible ? "inputBar" : "hidden"} onChange={searchChangeHandler} />
+		<div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClick={outsideClickHandler}>
+			<img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
+			<div className="headingAndToggleContainer">
+				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>Latest</h1>
+				{/* <input ref={refSearchBar} className={searchBarVisible ? "inputBar" : "hidden"} onChange={searchChangeHandler} /> */}
+				<Switch
+					checkedIcon={<img src="/assets/icons/sun.png" style={{ width: '24px', paddingTop: "4px", paddingLeft: '3px' }} alt="" />}
+					uncheckedIcon={<img src="/assets/icons/moon.png" alt="" style={{ width: '24px', paddingTop: '4px', paddingLeft: '4px' }} />}
+					checked={theme} onChange={themeChangeHandler}>
+				</Switch>
+			</div>
 			<BlogList blogs={filteredBlogs} />
 		</div>
 	)

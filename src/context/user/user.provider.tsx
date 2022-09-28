@@ -7,7 +7,7 @@ import firebase, { onAuthStateChanged } from "firebase/auth"
 import { UserContext } from "./user.context"
 
 //utils
-import { auth } from "../utils/firebase/firebase.utils"
+import { auth } from "../../utils/firebase/firebase.utils"
 
 type UserProviderProps = {
 	children: React.ReactNode

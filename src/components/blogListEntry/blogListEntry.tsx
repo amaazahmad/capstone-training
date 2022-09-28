@@ -1,9 +1,12 @@
 //react imports
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 //third party packes
 import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
+
+//contexts
+import { ThemeContext } from '../../context/theme/theme.context'
 
 type BlogData = {
 	key: string,
@@ -23,6 +26,7 @@ const BlogListEntry = ({ blog }: BlogListEntryProps) => {
 	const { title, email, content, date } = blog;
 	const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric' }).toUpperCase();
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
+	const { theme } = useContext(ThemeContext)
 
 	const updateScreenSize = () => {
 		setScreenWidth(window.innerWidth);
@@ -36,7 +40,7 @@ const BlogListEntry = ({ blog }: BlogListEntryProps) => {
 	return (
 		<div className="box-border flex flex-col text-left pl-8 pr-8 pt-8 pb-2">
 			{screenWidth >= 768 ?
-				<p className="font-lexend-deca not-italic font-semibold text-[24px] leading-8 text-dark-gray-text-color">
+				<p className={`${theme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-8 `}>
 					{dateToDisplay}
 				</p>
 				:
@@ -45,11 +49,18 @@ const BlogListEntry = ({ blog }: BlogListEntryProps) => {
 				<h1 className="font-dm-serif-display not-italic font-normal text-2xl text-green-text-color mb-[10px] mt-0 cursor-pointer
 			md:text-[32px] md:leading-[44px] xl:mt-[10px] xl:mb-4">{title}</h1>
 			</Link>
-			<TextTruncate containerClassName='font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 text-dark-gray-text-color
-			md:text-[20px] md:leading-[25px]' line={screenWidth < 768 ? 9 : 5} element="p" truncateText='' text={content} textTruncateChild={<Link className='font-lexend-deca not-italic font-normal text-base leading-5 text-green-text-color cursor-pointer md:text-xl md:leading-6' to={`/blog/${blog.key}`} state={{ blog }}>...read more</Link>}></TextTruncate>
-			<div className='flex flex-row justify-between '>
+			<TextTruncate
+				containerClassName={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
+				md:text-[20px] md:leading-[25px]`}
+				line={screenWidth < 768 ? 9 : 5} element="p" truncateText='' text={content}
+				textTruncateChild={
+					<Link className='font-lexend-deca not-italic font-normal text-base leading-5 text-green-text-color cursor-pointer md:text-xl md:leading-6'
+						to={`/blog/${blog.key}`} state={{ blog }}>...read more
+					</Link>}
+			></TextTruncate>
+			<div className=' flex flex-row justify-between '>
 				{screenWidth < 768 ?
-					<p className="font-lexend-deca not-italic font-semibold text-[16px] leading-5 text-dark-gray-text-color">
+					<p className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-semibold text-[16px] leading-5 `}>
 						{dateToDisplay}
 					</p>
 					:

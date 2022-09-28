@@ -5,7 +5,8 @@ import { useContext, useState } from "react"
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
 
 //contexts
-import { UserContext } from "../../context/user.context"
+import { UserContext } from "../../context/user/user.context"
+import { ThemeContext } from "../../context/theme/theme.context"
 
 //utils
 import { signOutUser } from "../../utils/firebase/firebase.utils"
@@ -13,6 +14,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils"
 const Sidebar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { theme } = useContext(ThemeContext);
 	const user = useContext(UserContext);
 	const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
 	const displayName = user?.currentUser?.displayName
@@ -24,7 +26,6 @@ const Sidebar = () => {
 	}
 
 	const userIconClickHandler = () => {
-		console.log(location)
 		location.pathname !== '/my-blogs' && navigate('/my-blogs');
 	}
 
@@ -33,10 +34,10 @@ const Sidebar = () => {
 	}
 
 	return (
-		<div className="flex flex-col-reverse h-screen xl:flex-row">
+		<div className="flex flex-col-reverse h-screen xl:flex-row z-10">
 
-			<div className="shadow-sidebar-box-shadow bg-dark-gray-text-color h-[7%] static flex flex-row justify-around items-center
-			xl:h-full xl:flex-col xl:justify-start xl:w-[8%] ">
+			<div className={`${theme ? " shadow-sidebar-box-light-shadow" : "shadow-sidebar-box-dark-shadow"}  bg-dark-gray-text-color z-10 h-[7%] static flex flex-row justify-around items-center
+			xl:h-full xl:flex-col xl:justify-start xl:w-[8%]`}>
 				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >
 					<img className="w-8 xl:w-16 xl:mt-8 cursor-pointer" src="/assets/icons/ellipse.svg" alt="" onClick={userIconClickHandler}></img>
 					<span className="text-white font-lexend-deca font-normal text-xl leading-6 absolute left-auto xl:mt-8 xl:text-3xl xl:leading-10 cursor-pointer" onClick={userIconClickHandler}>{displayName?.slice(0, 1).toUpperCase()} </span>
@@ -63,7 +64,7 @@ const Sidebar = () => {
 
 			</div>
 
-			<div className="overflow-scroll top-0 h-[93%] xl:w-[92%]">
+			<div className={`${theme ? " bg-dark-gray-text-color" : ""} overflow-scroll top-0 h-[93%] xl:w-[92%] xl:h-[100%]`}>
 				<Outlet context={[searchBarVisible, setSearchBarVisible]} />
 			</div>
 		</div>

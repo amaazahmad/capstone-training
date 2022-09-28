@@ -1,8 +1,11 @@
 //react imports
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 
 //components
 import BlogListEntry from "../blogListEntry/blogListEntry"
+
+//contexts
+import { ThemeContext } from '../../context/theme/theme.context'
 
 type BlogData = {
 	key: string,
@@ -19,6 +22,7 @@ type BlogListProps = {
 
 const BlogList = ({ blogs }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
+	const { theme } = useContext(ThemeContext)
 
 	useEffect(() => {
 		if (pageState === null) {
@@ -37,7 +41,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
 					return <BlogListEntry key={blog.key} blog={blog} />
 				})
 			) : (
-				<p className="pl-8 pt-8 text-xl font-normal font-lexend-deca box-border">{pageState}</p>
+				<p className={`${theme ? "text-white" : "text-dark-gray-color"} pl-8 pt-8 text-xl font-normal font-lexend-deca box-border`}>{pageState}</p>
 			)}
 		</div>
 	)

@@ -1,5 +1,5 @@
 // React Imports
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 
 //third party packages
 import { Routes, Route, useNavigate } from "react-router-dom"
@@ -13,11 +13,20 @@ import Sidebar from "./components/sidebar/sidebar.component"
 import MyBlogs from "./pages/myBlogs/myBlogs"
 import BlogView from "./pages/blogView/blogView.component"
 
+//contexts
+import { ThemeContext } from "./context/theme/theme.context"
+
 //styles
 import "./App.css"
 
 function App() {
 	const navigate = useNavigate()
+	const { setTheme } = useContext(ThemeContext)
+
+	const getTheme = () => {
+		const localStorageTheme = localStorage.getItem('theme') === 'dark' ? true : false;
+		setTheme(localStorageTheme);
+	}
 
 	useEffect(
 		() => {
@@ -27,6 +36,8 @@ function App() {
 				const path = user ? "/" : "/login"
 				navigate(path)
 			})
+
+			getTheme();
 		},
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps

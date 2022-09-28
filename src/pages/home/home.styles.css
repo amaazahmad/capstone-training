@@ -1,3 +1,18 @@
 .inputBar{
      border: 2px solid red
 }
+
+.headingAndToggleContainer{
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+     justify-content: space-between;
+     padding-right: 2rem;
+     padding-left: 2rem;
+}
+
+@media screen and (min-width:768px) {
+     .headingAndToggleContainer{
+          padding-left: 0;
+     }
+}

@@ -17,7 +17,8 @@ module.exports = {
 				"form-sidebar": "url(../public/assets/images/form-background.png)",
 			},
 			boxShadow:{
-				"sidebar-box-shadow":"0px 0px 50px 5px rgba(128, 128, 128, 1)",
+				"sidebar-box-dark-shadow" : "0px 0px 50px 5px rgba(128, 128, 128, 1)",
+				"sidebar-box-light-shadow" : "0px 0px 50px 5px white",
 			}
 		},
 	},

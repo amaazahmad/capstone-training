@@ -61,7 +61,6 @@ const SignupPage = () => {
 			setErrorMessage("Passwords do not match.")
 			return
 		}
-		console.log(typeof email)
 		const userResponse = await createUserAccount(name, email, password)
 
 		if (userResponse instanceof Error) {
