@@ -1,9 +1,6 @@
 //react imports
 import { useEffect, useState, useContext } from "react"
 
-//third party packes
-import { DocumentData } from "firebase/firestore"
-
 //contexts
 import { UserContext } from "../../context/user.context"
 
@@ -16,8 +13,15 @@ import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
 //import "./home.styles.css"
 
 const MyBlogs = () => {
+     type BlogData = {
+          key: string,
+          title: string,
+          email: string,
+          content: string,
+          date: Date
+     }
 
-     const [blogs, setBlogs] = useState<DocumentData[] | null>(null)
+     const [blogs, setBlogs] = useState<BlogData[] | null>(null)
 
      const user = useContext(UserContext);
      const email = user?.currentUser?.email;

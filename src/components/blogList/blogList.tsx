@@ -1,28 +1,32 @@
 //react imports
 import { useEffect, useState } from "react"
 
-// third party packes
-import { DocumentData } from "firebase/firestore"
-
 //components
 import BlogListEntry from "../blogListEntry/blogListEntry"
 
-type BlogListProps = {
-	blogs: DocumentData[] | null
+type BlogData = {
+	key: string,
+	title: string,
+	email: string,
+	content: string,
+	date: Date
 }
+
+type BlogListProps = {
+	blogs: BlogData[] | null
+}
+
 
 const BlogList = ({ blogs }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
 
 	useEffect(() => {
-
 		if (pageState === null) {
 			setPageState("Loading articles. Hold on.")
 		} else {
 			if (blogs?.length) setPageState(null)
 			else setPageState("No blogs found.")
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [blogs?.length])
 
@@ -30,7 +34,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
 		<div className="mb-5">
 			{blogs?.length ? (
 				blogs?.map((blog) => {
-					return <BlogListEntry key={blog.title} blog={blog} />
+					return <BlogListEntry key={blog.key} blog={blog} />
 				})
 			) : (
 				<p className="pl-8 pt-8 text-xl font-normal font-lexend-deca box-border">{pageState}</p>

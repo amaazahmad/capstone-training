@@ -16,8 +16,13 @@ export const getBlogs = async (emailFilter:string|null="") => {
 	const queryResponse =  emailFilter ?  query(collectionRef, where('email','==',emailFilter) ):query(collectionRef) 
 
 	const querySnapshotDocs = (await getDocs(queryResponse)).docs
-
+	
 	return querySnapshotDocs.map((snapshot) => {
-		return snapshot.data()
+		const {title, email, content, date} = snapshot.data();
+		const returnObj = {title,email,content,date:date.toDate(), key:snapshot.id}
+		return returnObj;
+		
 	})
 }
+	
+	

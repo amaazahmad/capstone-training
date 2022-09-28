@@ -1,8 +1,8 @@
 //react imports
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 //third party packages
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate, useLocation } from "react-router-dom"
 
 //contexts
 import { UserContext } from "../../context/user.context"
@@ -12,7 +12,9 @@ import { signOutUser } from "../../utils/firebase/firebase.utils"
 
 const Sidebar = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const user = useContext(UserContext);
+	const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
 	const displayName = user?.currentUser?.displayName
 	const signOutHandler = () => {
 		const response = signOutUser()
@@ -22,7 +24,12 @@ const Sidebar = () => {
 	}
 
 	const userIconClickHandler = () => {
-		navigate('/my-blogs');
+		console.log(location)
+		location.pathname !== '/my-blogs' && navigate('/my-blogs');
+	}
+
+	const searchClickHandler = () => {
+		setSearchBarVisible(!searchBarVisible);
 	}
 
 	return (
@@ -30,17 +37,17 @@ const Sidebar = () => {
 
 			<div className="shadow-sidebar-box-shadow bg-dark-gray-text-color h-[7%] static flex flex-row justify-around items-center
 			xl:h-full xl:flex-col xl:justify-start xl:w-[8%] ">
-				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" onClick={userIconClickHandler}>
-					<img className="w-8 xl:w-16 xl:mt-8" src="/assets/icons/ellipse.svg" alt=""></img>
-					<span className="text-white font-lexend-deca font-normal text-xl leading-6 absolute left-auto xl:mt-8 xl:text-3xl xl:leading-10">{displayName?.slice(0, 1).toUpperCase()}</span>
-					<p className="hidden md:fixed md:pl-20 md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 xl:hidden">{displayName}</p>
+				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >
+					<img className="w-8 xl:w-16 xl:mt-8 cursor-pointer" src="/assets/icons/ellipse.svg" alt="" onClick={userIconClickHandler}></img>
+					<span className="text-white font-lexend-deca font-normal text-xl leading-6 absolute left-auto xl:mt-8 xl:text-3xl xl:leading-10 cursor-pointer" onClick={userIconClickHandler}>{displayName?.slice(0, 1).toUpperCase()} </span>
+					<p className="hidden md:fixed md:pl-20 md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 xl:hidden cursor-pointer" onClick={userIconClickHandler}>{displayName}</p>
 				</div>
 
-
-				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12">
+				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" onClick={searchClickHandler}>
 					<img className="w-8" src="/assets/icons/search.svg" alt="" />
 					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 ">search</p>
 				</div>
+
 
 				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12">
 					<img className="w-8" src="/assets/icons/add_circle.svg" alt="" />
@@ -52,10 +59,12 @@ const Sidebar = () => {
 					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">signout</p>
 				</div>
 
+
+
 			</div>
 
-			<div className="overflow-scroll top-0 h-[100%] xl:w-[92%]">
-				<Outlet />
+			<div className="overflow-scroll top-0 h-[93%] xl:w-[92%]">
+				<Outlet context={[searchBarVisible, setSearchBarVisible]} />
 			</div>
 		</div>
 

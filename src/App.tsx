@@ -1,9 +1,9 @@
 // React Imports
-import React, {useEffect} from "react"
+import React, { useEffect } from "react"
 
 //third party packages
-import {Routes, Route, useNavigate} from "react-router-dom"
-import {onAuthStateChanged, getAuth} from "firebase/auth"
+import { Routes, Route, useNavigate } from "react-router-dom"
+import { onAuthStateChanged, getAuth } from "firebase/auth"
 
 //components
 import SignupPage from "./pages/signup/signup.component"
@@ -11,6 +11,7 @@ import LoginPage from "./pages/login/login.component"
 import HomePage from "./pages/home/home.component"
 import Sidebar from "./components/sidebar/sidebar.component"
 import MyBlogs from "./pages/myBlogs/myBlogs"
+import BlogView from "./pages/blogView/blogView.component"
 
 //styles
 import "./App.css"
@@ -35,13 +36,13 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route path='/' element={<Sidebar/>}>
-					<Route index={true} element={<HomePage />}/>
-					<Route path="my-blogs" element={<MyBlogs />}/>
+				<Route path='/' element={<Sidebar />}>
+					<Route index={true} element={<HomePage />} />
+					<Route path="my-blogs" element={<MyBlogs />} />
 				</Route>
-				
 				<Route path="/login" element={<LoginPage />}></Route>
 				<Route path="/signup" element={<SignupPage />}></Route>
+				<Route path="/blog/:blogID" element={<BlogView />} />
 			</Routes>
 		</div>
 	)
