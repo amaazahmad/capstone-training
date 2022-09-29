@@ -62,22 +62,6 @@ const HomePage = () => {
 		getBlogsAtHomePage()
 	}, [])
 
-	// useEffect(() => {
-	// 	document.addEventListener('click', (event) => {
-
-	// 		// console.log('EVENT TARGET: ', event.target);
-	// 		// console.log("ref: ", refSearchBar.current?.value);
-	// 		// console.log("VISIBLE: ", searchBarVisible);
-	// 		if (event.target !== refSearchBar.current && searchBarVisible && !refSearchBar.current?.value) {
-
-	// 			console.log("CLOSING SIDEBAR DUE TO OUTSIDE CLICK");
-	// 			//console.log(event.target)
-	// 			setSearchBarVisible(false)
-
-	// 		}
-	// 	}, true)
-	// })
-
 	const outsideClickHandler = (event: any) => {
 		if (event.target !== refSearchBar.current && searchBarVisible && !refSearchBar.current?.value) {
 			setSearchBarVisible(false)

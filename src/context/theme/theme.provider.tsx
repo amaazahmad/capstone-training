@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { ThemeContext } from './theme.context'
 
@@ -11,12 +11,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 }: ThemeProviderProps) => {
      const [theme, setTheme] = useState<boolean>(true)
 
-     // useEffect(() => {
-     //      const unsubscribeFunc = onAuthStateChanged(auth, (firebaseUser) => {
-     //           setCurrentUser(firebaseUser)
-     //      })
-     //      return unsubscribeFunc
-     // }, [])
+     useEffect(() => {
+          const localStorageTheme = localStorage.getItem('theme') === 'dark' ? true : false;
+          setTheme(localStorageTheme);
+     }, [])
 
      return (
           <ThemeContext.Provider value={{ theme, setTheme }}>

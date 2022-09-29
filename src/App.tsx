@@ -23,10 +23,7 @@ function App() {
 	const navigate = useNavigate()
 	const { setTheme } = useContext(ThemeContext)
 
-	const getTheme = () => {
-		const localStorageTheme = localStorage.getItem('theme') === 'dark' ? true : false;
-		setTheme(localStorageTheme);
-	}
+
 
 	useEffect(
 		() => {
@@ -36,8 +33,6 @@ function App() {
 				const path = user ? "/" : "/login"
 				navigate(path)
 			})
-
-			getTheme();
 		},
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
