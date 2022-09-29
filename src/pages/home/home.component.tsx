@@ -27,7 +27,7 @@ const HomePage = () => {
 
 
 	const { theme, setTheme } = useContext(ThemeContext);
-	const [, setBlogs] = useState<BlogData[] | null>(null)
+	const [blogs, setBlogs] = useState<BlogData[] | null>(null)
 	const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
 	const refSearchBar = useRef<HTMLInputElement>(null);
 
@@ -37,11 +37,11 @@ const HomePage = () => {
 	]
 	const [searchBarVisible, setSearchBarVisible] = useOutletContext<OutletContextType>()
 
-	// const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-	// 	const searchField = event.target.value.toLowerCase()
-	// 	const filteredBlogs = blogs ? blogs.filter((blog) => { return blog.title.toLowerCase().includes(searchField) }) : blogs
-	// 	setFilteredBlogs(filteredBlogs);
-	// }
+	const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const searchField = event.target.value.toLowerCase()
+		const filteredBlogs = blogs ? blogs.filter((blog) => { return blog.title.toLowerCase().includes(searchField) }) : blogs
+		setFilteredBlogs(filteredBlogs);
+	}
 
 	useEffect(() => {
 
@@ -86,7 +86,7 @@ const HomePage = () => {
 			<img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
 			<div className="headingAndToggleContainer">
 				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>Latest</h1>
-				{/* <input ref={refSearchBar} className={searchBarVisible ? "inputBar" : "hidden"} onChange={searchChangeHandler} /> */}
+				<input ref={refSearchBar} className={searchBarVisible ? "inputBar" : "hidden"} onChange={searchChangeHandler} />
 				<Switch
 					checkedIcon={<img src="/assets/icons/sun.png" style={{ width: '24px', paddingTop: "4px", paddingLeft: '3px' }} alt="" />}
 					uncheckedIcon={<img src="/assets/icons/moon.png" alt="" style={{ width: '24px', paddingTop: '4px', paddingLeft: '4px' }} />}

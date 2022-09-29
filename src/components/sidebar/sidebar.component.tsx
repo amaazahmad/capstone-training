@@ -55,7 +55,7 @@ const Sidebar = () => {
 					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">create</p>
 				</div>
 
-				<div className="hidden xl:cursor-pointer xl:flex xl:flex-col xl:items-center xl:mt-auto xl:mb-8" onClick={signOutHandler}>
+				<div className="cursor-pointer md:flex md:flex-row md:items-center xl:flex xl:flex-col xl:items-center xl:mt-auto xl:mb-8" onClick={signOutHandler}>
 					<img className="w-8" src="/assets/icons/logout.png" alt="" />
 					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">signout</p>
 				</div>
