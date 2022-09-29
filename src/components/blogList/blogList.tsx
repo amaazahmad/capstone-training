@@ -7,18 +7,12 @@ import BlogListEntry from "../blogListEntry/blogListEntry"
 //contexts
 import { ThemeContext } from '../../context/theme/theme.context'
 
-type BlogData = {
-	key: string,
-	title: string,
-	email: string,
-	content: string,
-	date: Date
-}
+//types
+import { BlogData } from '../../types/blog/blog'
 
 type BlogListProps = {
 	blogs: BlogData[] | null
 }
-
 
 const BlogList = ({ blogs }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
@@ -28,7 +22,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
 		if (pageState === null) {
 			setPageState("Loading articles. Hold on.")
 		} else {
-			if (blogs?.length) setPageState(null)
+			if (blogs?.length) setPageState("Loading articles. Hold on.")
 			else setPageState("No blogs found.")
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

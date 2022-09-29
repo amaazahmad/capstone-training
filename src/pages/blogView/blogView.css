@@ -1,8 +1,10 @@
 .fullContainer{
      width: 100vw;
-     height:100%;
+     bottom: 0;
      display: flex;
      flex-direction: column;
+     
+
 }
 
 .backButtonContainer{
@@ -16,8 +18,8 @@
 }
 
 .contentContainer{
-     height:89vh;
      width: 100%;
+     height:fit-content;
      padding-left: 44px;
      padding-right: 44px;
      display: flex;
@@ -44,7 +46,6 @@
      margin-bottom: -12px;
      margin-left: 16px;
      cursor: pointer;
-     color:rgba(39, 39, 39, 1)
 }
 
 
@@ -81,7 +82,6 @@
      line-height: 32px;
      text-align: left;
      margin-top: 60px;
-      color:rgba(39, 39, 39, 1)
 }
 
 .content::first-letter{
@@ -92,6 +92,14 @@
 @media screen and (min-width:768px) {
      .content{
           font-size: 20px;
+     }
+
+     /* .contentContainer{
+          /* height:auto 
+     } */
+
+     .fullContainer{
+          height:100vh
      }
 }    
 

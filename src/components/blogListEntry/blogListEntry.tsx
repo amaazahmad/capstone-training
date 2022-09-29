@@ -8,13 +8,8 @@ import { Link } from 'react-router-dom';
 //contexts
 import { ThemeContext } from '../../context/theme/theme.context'
 
-type BlogData = {
-	key: string,
-	title: string,
-	email: string,
-	content: string,
-	date: Date
-}
+//types
+import { BlogData } from '../../types/blog/blog'
 
 type BlogListEntryProps = {
 	blog: BlogData,

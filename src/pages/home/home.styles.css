@@ -8,7 +8,7 @@
 
 .inputBarActive{
      margin-top: 52px;
-     width: 24rem;
+     width: 16rem;
      transition: 0.5s;
      border:2px solid rgba(86, 204, 106, 1);
      border-radius: 50px;
@@ -20,6 +20,7 @@
 @media screen and (min-width:768px) {
      .inputBarActive{
           margin-top: 0;
+          width:24rem
      }
 }
 
@@ -27,6 +28,7 @@
      display: flex;
      flex-direction: row;
      width: 100%;
+
      justify-content: space-between;
      padding-right: 2rem;
      padding-left: 2rem;

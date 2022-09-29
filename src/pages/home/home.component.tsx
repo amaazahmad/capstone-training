@@ -1,5 +1,4 @@
 //react imports
-import { readFileSync } from "fs";
 import React, { useEffect, useState, useRef, useContext } from "react"
 
 //third party packes
@@ -15,16 +14,12 @@ import { ThemeContext } from "../../context/theme/theme.context"
 //utils
 import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
 
+//types
+import { BlogData } from '../../types/blog/blog'
+
 import './home.styles.css'
 
 const HomePage = () => {
-	type BlogData = {
-		key: string,
-		title: string,
-		email: string,
-		content: string,
-		date: Date
-	}
 
 
 	const { theme, setTheme } = useContext(ThemeContext);
@@ -37,6 +32,17 @@ const HomePage = () => {
 		setSearchBarVisible: (visible: boolean) => {}
 	]
 	const [searchBarVisible, setSearchBarVisible] = useOutletContext<OutletContextType>()
+
+	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
+
+	const updateScreenSize = () => {
+		setScreenWidth(window.innerWidth);
+	}
+
+	useEffect(() => {
+		window.addEventListener('resize', updateScreenSize);
+		return (() => { window.removeEventListener('resize', updateScreenSize) })
+	})
 
 	const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const searchField = event.target.value.toLowerCase()
@@ -88,12 +94,15 @@ const HomePage = () => {
 			<img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
 			<div className="headingAndToggleContainer">
 				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>Latest</h1>
-				<input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} />
+				{screenWidth >= 768 ? <input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} /> : <></>}
 				<Switch
 					checkedIcon={<img src="/assets/icons/sun.png" style={{ width: '24px', paddingTop: "4px", paddingLeft: '3px' }} alt="" />}
 					uncheckedIcon={<img src="/assets/icons/moon.png" alt="" style={{ width: '24px', paddingTop: '4px', paddingLeft: '4px' }} />}
 					checked={theme} onChange={themeChangeHandler}>
 				</Switch>
+			</div>
+			<div>
+				{screenWidth < 768 ? <input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} /> : <></>}
 			</div>
 			<BlogList blogs={filteredBlogs} />
 		</div>
