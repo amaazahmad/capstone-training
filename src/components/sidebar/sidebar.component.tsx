@@ -44,9 +44,9 @@ const Sidebar = () => {
 					<p className="hidden md:fixed md:pl-20 md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 xl:hidden cursor-pointer" onClick={userIconClickHandler}>{displayName}</p>
 				</div>
 
-				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" onClick={searchClickHandler}>
-					<img className="w-8" src="/assets/icons/search.svg" alt="" />
-					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 ">search</p>
+				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >
+					<img className=" cursor-pointer w-8" src="/assets/icons/search.svg" alt="" onClick={searchClickHandler} />
+					<p className=" cursor-pointer hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 " onClick={searchClickHandler}>search</p>
 				</div>
 
 
