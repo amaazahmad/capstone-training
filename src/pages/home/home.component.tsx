@@ -1,4 +1,5 @@
 //react imports
+import { readFileSync } from "fs";
 import React, { useEffect, useState, useRef, useContext } from "react"
 
 //third party packes
@@ -51,6 +52,7 @@ const HomePage = () => {
 			setBlogs(blogsRec)
 			setFilteredBlogs(blogsRec)
 		}
+
 		getBlogsAtHomePage()
 	}, [])
 
@@ -86,7 +88,7 @@ const HomePage = () => {
 			<img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
 			<div className="headingAndToggleContainer">
 				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>Latest</h1>
-				<input ref={refSearchBar} className={searchBarVisible ? "inputBar" : "hidden"} onChange={searchChangeHandler} />
+				<input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} />
 				<Switch
 					checkedIcon={<img src="/assets/icons/sun.png" style={{ width: '24px', paddingTop: "4px", paddingLeft: '3px' }} alt="" />}
 					uncheckedIcon={<img src="/assets/icons/moon.png" alt="" style={{ width: '24px', paddingTop: '4px', paddingLeft: '4px' }} />}
