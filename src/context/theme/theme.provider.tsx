@@ -9,7 +9,7 @@ type ThemeProviderProps = {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
      children,
 }: ThemeProviderProps) => {
-     const [theme, setTheme] = useState<boolean>(true)
+     const [theme, setTheme] = useState<boolean>(false)
 
      useEffect(() => {
           const localStorageTheme = localStorage.getItem('theme') === 'dark' ? true : false;
