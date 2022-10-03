@@ -41,7 +41,7 @@ const Sidebar = () => {
 				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >
 					<img className="w-8 xl:w-16 xl:mt-8 cursor-pointer" src="/assets/icons/ellipse.svg" alt="" onClick={userIconClickHandler}></img>
 					<span className="text-white font-lexend-deca font-normal text-xl leading-6 absolute left-auto xl:mt-8 xl:text-3xl xl:leading-10 cursor-pointer" onClick={userIconClickHandler}>{displayName?.slice(0, 1).toUpperCase()} </span>
-					<p className="hidden md:fixed md:pl-20 md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 xl:hidden cursor-pointer" onClick={userIconClickHandler}>{displayName}</p>
+					<p className="hidden md:fixed md:pl-20 md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-5 xl:hidden cursor-pointer" onClick={userIconClickHandler}>{displayName}</p>
 				</div>
 
 				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >

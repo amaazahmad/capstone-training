@@ -18,7 +18,7 @@ module.exports = {
 			},
 			boxShadow:{
 				"sidebar-box-dark-shadow" : "0px 0px 50px 5px rgba(128, 128, 128, 1)",
-				"sidebar-box-light-shadow" : "0px 0px 50px 5px white",
+				"sidebar-box-light-shadow" : "0px 0px 10px 1px white",
 			}
 		},
 	},

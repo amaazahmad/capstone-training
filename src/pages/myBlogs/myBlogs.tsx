@@ -89,7 +89,7 @@ const MyBlogs = () => {
                <div>
                     {screenWidth < 768 ? <input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} /> : <></>}
                </div>
-               <BlogList blogs={filteredBlogs} />
+               <BlogList blogs={filteredBlogs} isMyBlogs={true} />
           </div>
      )
 }

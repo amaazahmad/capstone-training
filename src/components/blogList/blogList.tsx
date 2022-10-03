@@ -11,10 +11,11 @@ import { ThemeContext } from '../../context/theme/theme.context'
 import { BlogData } from '../../types/blog/blog'
 
 type BlogListProps = {
-	blogs: BlogData[] | null
+	blogs: BlogData[] | null,
+	isMyBlogs: boolean
 }
 
-const BlogList = ({ blogs }: BlogListProps) => {
+const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
 	const { theme } = useContext(ThemeContext)
 
@@ -29,10 +30,10 @@ const BlogList = ({ blogs }: BlogListProps) => {
 	}, [blogs?.length])
 
 	return (
-		<div className="mb-5">
+		<div className="mb-5 mt-8">
 			{blogs?.length ? (
 				blogs?.map((blog) => {
-					return <BlogListEntry key={blog.key} blog={blog} />
+					return <BlogListEntry key={blog.key} blog={blog} isMyBlog={isMyBlogs} />
 				})
 			) : (
 				<p className={`${theme ? "text-white" : "text-dark-gray-color"} pl-8 pt-8 text-xl font-normal font-lexend-deca box-border`}>{pageState}</p>
