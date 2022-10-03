@@ -77,17 +77,33 @@ const MyBlogs = () => {
      return (
           <div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClick={outsideClickHandler}>
                <img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
-               <div className="headingAndToggleContainer">
+               <div className="flex flex-row w-full justify-between pr-8 pl-8 md:pl-0">
                     <h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>My Blogs</h1>
-                    {screenWidth >= 768 ? <input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} /> : <></>}
+                    {screenWidth >= 768 ?
+                         <input
+                              ref={refSearchBar}
+                              className={`${searchBarVisible ? "mt-[52px] w-96 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-7 outline-hidden font-lexend-deca" : "w-0 duration-500"}`}
+                              onChange={searchChangeHandler}
+                         />
+                         :
+                         <></>
+                    }
                     <Switch
-                         checkedIcon={<img src="/assets/icons/sun.png" style={{ width: '24px', paddingTop: "4px", paddingLeft: '3px' }} alt="" />}
-                         uncheckedIcon={<img src="/assets/icons/moon.png" alt="" style={{ width: '24px', paddingTop: '4px', paddingLeft: '4px' }} />}
+                         checkedIcon={<img src="/assets/icons/sun.png" alt="" className="w-6 pt-1 pl-1" />}
+                         uncheckedIcon={<img src="/assets/icons/moon.png" alt="" className="w-6 pt-1 pl-1" />}
                          checked={theme} onChange={themeChangeHandler}>
                     </Switch>
                </div>
                <div>
-                    {screenWidth < 768 ? <input ref={refSearchBar} className={searchBarVisible ? "inputBarActive" : "inputBar"} onChange={searchChangeHandler} /> : <></>}
+                    {screenWidth < 768 ?
+                         <input
+                              ref={refSearchBar}
+                              className={`${searchBarVisible ? "mt-[40px] w-64 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-7 outline-hidden font-lexend-deca" : "w-0 duration-500"}`}
+                              onChange={searchChangeHandler}
+                         />
+                         :
+                         <></>
+                    }
                </div>
                <BlogList blogs={filteredBlogs} isMyBlogs={true} />
           </div>
