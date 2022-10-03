@@ -4,6 +4,8 @@ import React, { useEffect, useState, useRef, useContext } from "react"
 //third party packes
 import { useOutletContext } from "react-router-dom"
 import Switch from "react-switch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 //components
 import BlogList from "../../components/blogList/blogList"
@@ -46,12 +48,6 @@ const MyBlogs = () => {
           return (() => { window.removeEventListener('resize', updateScreenSize) })
      })
 
-     const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-          const searchField = event.target.value.toLowerCase()
-          const filteredBlogs = blogs ? blogs.filter((blog) => { return blog.title.toLowerCase().includes(searchField) }) : blogs
-          setFilteredBlogs(filteredBlogs);
-     }
-
      useEffect(() => {
           const getBlogsAtHomePage = async () => {
                const blogsRec = await getBlogs(email)
@@ -61,7 +57,13 @@ const MyBlogs = () => {
           }
 
           getBlogsAtHomePage()
-     })
+     }, [email])
+
+     const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+          const searchField = event.target.value.toLowerCase()
+          const filteredBlogs = blogs ? blogs.filter((blog) => { return blog.title.toLowerCase().includes(searchField) }) : blogs
+          setFilteredBlogs(filteredBlogs);
+     }
 
      const outsideClickHandler = (event: any) => {
           if (event.target !== refSearchBar.current && searchBarVisible && !refSearchBar.current?.value) {
@@ -74,17 +76,29 @@ const MyBlogs = () => {
           setTheme((!theme))
      }
 
+     const clearSearchClickHandler = () => {
+          if (refSearchBar.current?.value)
+               refSearchBar.current.value = "";
+          setFilteredBlogs(blogs);
+     }
+
      return (
-          <div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClick={outsideClickHandler}>
+          <div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
                <img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
                <div className="flex flex-row w-full justify-between pr-8 pl-8 md:pl-0">
                     <h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>My Blogs</h1>
                     {screenWidth >= 768 ?
-                         <input
-                              ref={refSearchBar}
-                              className={`${searchBarVisible ? "mt-[52px] w-96 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-7 outline-hidden font-lexend-deca" : "w-0 duration-500"}`}
-                              onChange={searchChangeHandler}
-                         />
+                         <div>
+                              <input
+                                   type='search'
+                                   ref={refSearchBar}
+                                   className={`${searchBarVisible ? "mt-[40px] w-96 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
+                                   onChange={searchChangeHandler}
+                              >
+
+                              </input>
+                              <FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
+                         </div>
                          :
                          <></>
                     }
@@ -96,11 +110,17 @@ const MyBlogs = () => {
                </div>
                <div>
                     {screenWidth < 768 ?
-                         <input
-                              ref={refSearchBar}
-                              className={`${searchBarVisible ? "mt-[40px] w-64 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-7 outline-hidden font-lexend-deca" : "w-0 duration-500"}`}
-                              onChange={searchChangeHandler}
-                         />
+                         <div>
+                              <input
+                                   type='search'
+                                   ref={refSearchBar}
+                                   className={`${searchBarVisible ? "mt-[40px] w-64 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
+                                   onChange={searchChangeHandler}
+                              >
+
+                              </input>
+                              <FontAwesomeIcon className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
+                         </div>
                          :
                          <></>
                     }
