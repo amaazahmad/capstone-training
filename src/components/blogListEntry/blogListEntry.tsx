@@ -4,6 +4,11 @@ import { useEffect, useState, useContext } from 'react';
 //third party packes
 import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+//local components
+import DeleteConfirmation from '../deleteConfirmation/deleteConfirmation.component';
 
 //contexts
 import { ThemeContext } from '../../context/theme/theme.context'
@@ -23,6 +28,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 	const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric' }).toUpperCase();
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 	const { theme } = useContext(ThemeContext)
+	const [deletePopup, setDeletePopup] = useState<boolean>(false);
 
 	const updateScreenSize = () => {
 		setScreenWidth(window.innerWidth);
@@ -33,6 +39,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 		return (() => { window.removeEventListener('resize', updateScreenSize) })
 	})
 
+
 	return (
 		<div className="box-border flex flex-col text-left pl-8 pr-8 pb-8">
 			{screenWidth >= 768 ?
@@ -40,7 +47,8 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 					{dateToDisplay}
 				</p>
 				:
-				<></>}
+				<></>
+			}
 			<div className="w-full flex flex-row justify-between">
 				<Link to={`/blog/${blog.key}`} state={{ blog }} style={{ width: '100%' }}>
 					<h1 className=" w-4/5 font-dm-serif-display not-italic font-normal text-2xl text-green-text-color mb-[10px] mt-0 cursor-pointer
@@ -48,7 +56,21 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 				</Link>
 				{isMyBlog && <div className='w-1/5 flex flex-row pt-2 justify-end'>
 					<img className='w-5 h-5 mr-4 md:w-6 md:h-6' src="/assets/icons/editIcon.png" alt="" />
-					<img className='w-5 h-5 md:w-6 md:h-6' src="/assets/icons/redDeleteIcon.png" alt="" />
+					<Popup
+						defaultOpen={deletePopup}
+						open={deletePopup}
+						onOpen={() => { setDeletePopup(true) }}
+						onClose={() => { setDeletePopup(false) }}
+						contentStyle={{ padding: 0, border: 0 }}
+						modal
+						closeOnDocumentClick
+						repositionOnResize
+						trigger={<img className='w-5 h-5 md:w-6 md:h-6 cursor-pointer' src="/assets/icons/redDeleteIcon.png" alt="" />}
+					>
+						<DeleteConfirmation setDeletePopup={setDeletePopup} blogID={blog.key} />
+					</Popup>
+
+
 				</div>}
 
 			</div>

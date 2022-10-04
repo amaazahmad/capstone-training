@@ -3,8 +3,11 @@ import {
 	collection,
 	query,
 	getDocs,
-	where
+	where,
+	doc, 
+	deleteDoc,
 } from "firebase/firestore"
+
 
 import {firebaseApp} from "./firebase.utils"
 
@@ -23,6 +26,10 @@ export const getBlogs = async (emailFilter:string|null="") => {
 		return returnObj;
 		
 	})
+}
+
+export const deleteBlog = async (blogID:string) => {
+	await deleteDoc(doc(db,"blogs","123"))
 }
 	
 	
