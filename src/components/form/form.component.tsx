@@ -14,6 +14,7 @@ type FormFields = {
 		value: number
 		message: string
 	}
+	defaultValue?: string
 }
 
 type FormProps = {
@@ -54,6 +55,7 @@ const Form = ({ fields, buttonText, onSubmitHandler }: FormProps) => {
                                    sm:self-start sm:ml-0 sm:text-sm sm:h-12
                                    lg:h-[60px] lg:text-lg lg:max-w-[600px] "
 								type={field.type}
+								defaultValue={field.defaultValue}
 								placeholder={
 									field.name === "confirmPassword"
 										? `Re-enter the password`

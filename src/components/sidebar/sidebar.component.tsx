@@ -3,6 +3,11 @@ import { useContext, useState } from "react"
 
 //third party packages
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+//local components
+import EditBlog from "../editBlog/editBlog.component";
 
 //contexts
 import { UserContext } from "../../context/user/user.context"
@@ -17,6 +22,7 @@ const Sidebar = () => {
 	const { theme } = useContext(ThemeContext);
 	const user = useContext(UserContext);
 	const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
+	const [createBlogPopup, setCreateBlogPopup] = useState<boolean>(false);
 	const displayName = user?.currentUser?.displayName
 	const signOutHandler = () => {
 		const response = signOutUser()
@@ -49,11 +55,25 @@ const Sidebar = () => {
 					<p className=" cursor-pointer hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1 " onClick={searchClickHandler}>search</p>
 				</div>
 
+				<Popup
+					defaultOpen={createBlogPopup}
+					open={createBlogPopup}
+					onOpen={() => { setCreateBlogPopup(true) }}
+					onClose={() => { setCreateBlogPopup(false) }}
+					contentStyle={{ padding: 0, border: 0 }}
+					modal
+					closeOnDocumentClick
+					repositionOnResize
+					trigger={<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12">
+						<img className="w-8" src="/assets/icons/add_circle.svg" alt="" />
+						<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">create</p>
+					</div>}
+				>
+					<EditBlog />
+				</Popup>
 
-				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12">
-					<img className="w-8" src="/assets/icons/add_circle.svg" alt="" />
-					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">create</p>
-				</div>
+
+
 
 				<div className="cursor-pointer md:flex md:flex-row md:items-center xl:flex xl:flex-col xl:items-center xl:mt-auto xl:mb-8" onClick={signOutHandler}>
 					<img className="w-8" src="/assets/icons/logout.png" alt="" />

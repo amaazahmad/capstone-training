@@ -9,6 +9,7 @@ import 'reactjs-popup/dist/index.css';
 
 //local components
 import DeleteConfirmation from '../deleteConfirmation/deleteConfirmation.component';
+import EditBlog from '../editBlog/editBlog.component';
 
 //contexts
 import { ThemeContext } from '../../context/theme/theme.context'
@@ -18,7 +19,6 @@ import { BlogData } from '../../types/blog/blog'
 
 type BlogListEntryProps = {
 	blog: BlogData,
-	key: string,
 	isMyBlog: boolean
 }
 
@@ -29,6 +29,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 	const { theme } = useContext(ThemeContext)
 	const [deletePopup, setDeletePopup] = useState<boolean>(false);
+	const [editPopup, setEditPopup] = useState<boolean>(false);
 
 	const updateScreenSize = () => {
 		setScreenWidth(window.innerWidth);
@@ -55,7 +56,20 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						md:text-[32px] md:leading-[44px] xl:mt-[10px] xl:mb-4">{title}</h1>
 				</Link>
 				{isMyBlog && <div className='w-1/5 flex flex-row pt-2 justify-end'>
-					<img className='w-5 h-5 mr-4 md:w-6 md:h-6' src="/assets/icons/editIcon.png" alt="" />
+					<Popup
+						defaultOpen={editPopup}
+						open={editPopup}
+						onOpen={() => { setEditPopup(true) }}
+						onClose={() => { setEditPopup(false) }}
+						contentStyle={{ padding: 0, border: 0 }}
+						modal
+						closeOnDocumentClick
+						repositionOnResize
+						trigger={<img className='w-5 h-5 mr-4 md:w-6 md:h-6' src="/assets/icons/editIcon.png" alt="" />}
+					>
+						<EditBlog blog={blog} />
+					</Popup>
+
 					<Popup
 						defaultOpen={deletePopup}
 						open={deletePopup}
