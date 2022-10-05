@@ -8,10 +8,6 @@ import {
 	deleteDoc,
 	addDoc
 } from "firebase/firestore"
-import { BlogData } from "../../types/blog/blog"
-
-
-import {firebaseApp} from "./firebase.utils"
 
 const db = getFirestore()
 
