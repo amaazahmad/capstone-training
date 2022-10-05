@@ -61,7 +61,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						open={editPopup}
 						onOpen={() => { setEditPopup(true) }}
 						onClose={() => { setEditPopup(false) }}
-						contentStyle={{ padding: 0, border: 0 }}
+						contentStyle={{ padding: 0, border: 0, width: '85%', height: '65%' }}
 						modal
 						closeOnDocumentClick
 						repositionOnResize
@@ -75,7 +75,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						open={deletePopup}
 						onOpen={() => { setDeletePopup(true) }}
 						onClose={() => { setDeletePopup(false) }}
-						contentStyle={{ padding: 0, border: 0 }}
+						contentStyle={{ padding: 0, border: 0, }}
 						modal
 						closeOnDocumentClick
 						repositionOnResize

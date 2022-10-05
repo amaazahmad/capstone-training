@@ -15,6 +15,7 @@ type FormFields = {
 		message: string
 	}
 	defaultValue?: string
+	styles: string
 }
 
 type FormProps = {
@@ -31,9 +32,9 @@ const Form = ({ fields, buttonText, onSubmitHandler }: FormProps) => {
 	} = useForm()
 
 	return (
-		<div className="box-border flex flex-col justify-center items-center w-full">
+		<div className="box-border flex flex-col justify-center items-center w-full h-full">
 			<form
-				className="flex flex-col w-4/5 justify-center items-center sm:w-full sm:ml-0"
+				className="flex flex-col w-4/5 justify-center items-center h-full sm:w-full "
 				onSubmit={handleSubmit(async (data) => {
 					await onSubmitHandler(data)
 				})}
@@ -50,23 +51,33 @@ const Form = ({ fields, buttonText, onSubmitHandler }: FormProps) => {
 
 					return (
 						<React.Fragment key={field.name}>
-							<input
-								className="box-border w-full not-italic text-gray-900 outline-none leading-5 text-base m-0 p-4 border border-solid border-secondary-text-color font-lexend-deca focus:border-green-text-color placeholder-secondary-text-color
-                                   sm:self-start sm:ml-0 sm:text-sm sm:h-12
-                                   lg:h-[60px] lg:text-lg lg:max-w-[600px] "
-								type={field.type}
-								defaultValue={field.defaultValue}
-								placeholder={
-									field.name === "confirmPassword"
-										? `Re-enter the password`
-										: `Enter your ${field.name}`
-								}
-								{...register(field.name, {
-									required: field.required,
-									pattern: { ...patternObj },
-									minLength: { ...minLengthObj },
-								})}
-							></input>
+							{field.type === 'textarea' ?
+								<textarea className={field.styles}
+									defaultValue={field.defaultValue}
+									placeholder={`Enter your ${field.name}`}
+									{...register(field.name, {
+										required: field.required,
+										pattern: { ...patternObj },
+										minLength: { ...minLengthObj },
+									})}
+								/>
+								:
+								<input
+									className={field.styles}
+									type={field.type}
+									defaultValue={field.defaultValue}
+									placeholder={
+										field.name === "confirmPassword"
+											? `Re-enter the password`
+											: `Enter your ${field.name}`
+									}
+									{...register(field.name, {
+										required: field.required,
+										pattern: { ...patternObj },
+										minLength: { ...minLengthObj },
+									})}
+								></input>}
+
 							<p className="m-0 p-0 self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
 								{errors[field.name] ? `${errors[field.name]?.message}` : ""}
 							</p>

@@ -25,6 +25,7 @@ const LoginPage = () => {
 					/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 				message: "Invalid email",
 			},
+			styles: "box-border w-full not-italic text-gray-900 outline-none leading-5 text-base m-0 p-4 border border-solid border-secondary-text-color font-lexend-deca focus:border-green-text-color placeholder-secondary-text-color sm:self-start sm:ml-0 sm:text-sm sm:h-12 lg:h-[60px] lg:text-lg lg:max-w-[600px]"
 		},
 		{
 			name: "password",
@@ -34,6 +35,7 @@ const LoginPage = () => {
 				message: "Password must be atleast 6 characters long.",
 			},
 			type: "password",
+			styles: "box-border w-full not-italic text-gray-900 outline-none leading-5 text-base m-0 p-4 border border-solid border-secondary-text-color font-lexend-deca focus:border-green-text-color placeholder-secondary-text-color sm:self-start sm:ml-0 sm:text-sm sm:h-12 lg:h-[60px] lg:text-lg lg:max-w-[600px]"
 		},
 	]
 
