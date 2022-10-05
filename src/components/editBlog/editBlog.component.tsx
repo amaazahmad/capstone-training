@@ -1,17 +1,23 @@
 import Form from "../form/form.component"
+import { getAuth } from "firebase/auth"
 import { FieldValues } from "react-hook-form"
+
 
 import { BlogData } from '../../types/blog/blog'
 import { useContext } from "react"
 import { ThemeContext } from "../../context/theme/theme.context"
 
+import { createBlog } from '../../utils/firebase/firebaseDB.utils'
+
 type EditBlogProps = {
-     blog?: BlogData
+     blog?: BlogData;
+     setEditPopup: (isOpen: boolean) => void;
 }
 
-const EditBlog = ({ blog }: EditBlogProps) => {
+const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
 
      const { theme } = useContext(ThemeContext)
+     const auth = getAuth()
 
      const EditBlogFields = [
           {
@@ -42,7 +48,21 @@ const EditBlog = ({ blog }: EditBlogProps) => {
      ]
 
      const onSubmitHandler = async (data: FieldValues) => {
-          console.log(data)
+          if (blog) {
+               //updating an existing blog
+
+          }
+          else {
+               // creating a new blog
+               const userEmail = auth.currentUser?.email || "";
+               const now = new Date();
+               const response = await createBlog(data.title, data.content, userEmail, now)
+               if (response === 'success') {
+                    window.location.reload();
+               } else {
+                    alert(`Failed to create blog: ${response}`)
+               }
+          }
      }
 
      return (

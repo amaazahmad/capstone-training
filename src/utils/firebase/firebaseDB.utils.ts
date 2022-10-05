@@ -6,13 +6,14 @@ import {
 	where,
 	doc, 
 	deleteDoc,
+	addDoc
 } from "firebase/firestore"
+import { BlogData } from "../../types/blog/blog"
 
 
 import {firebaseApp} from "./firebase.utils"
 
-const db = getFirestore(firebaseApp)
-
+const db = getFirestore()
 
 export const getBlogs = async (emailFilter:string|null="") => {
 	const collectionRef = collection(db, "blogs")
@@ -29,7 +30,21 @@ export const getBlogs = async (emailFilter:string|null="") => {
 }
 
 export const deleteBlog = async (blogID:string) => {
-	await deleteDoc(doc(db,"blogs","123"))
+	await deleteDoc(doc(db,"blogs",blogID))
 }
 	
-	
+export const createBlog = async(title:string, content:string, email:string, date:Date )=>{
+	try{
+		const collectionRef = collection(db, "blogs")
+		await addDoc(collectionRef,{
+			title,
+			content,
+			email,
+			date
+		});
+
+		return "success";
+	} catch(e) {
+		return e
+	}
+}

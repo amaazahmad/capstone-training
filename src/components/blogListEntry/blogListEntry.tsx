@@ -67,7 +67,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						repositionOnResize
 						trigger={<img className='w-5 h-5 mr-4 md:w-6 md:h-6' src="/assets/icons/editIcon.png" alt="" />}
 					>
-						<EditBlog blog={blog} />
+						<EditBlog blog={blog} setEditPopup={setEditPopup} />
 					</Popup>
 
 					<Popup

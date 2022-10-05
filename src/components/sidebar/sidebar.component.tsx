@@ -69,7 +69,7 @@ const Sidebar = () => {
 						<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">create</p>
 					</div>}
 				>
-					<EditBlog />
+					<EditBlog setEditPopup={setCreateBlogPopup} />
 				</Popup>
 
 

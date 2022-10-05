@@ -15,8 +15,9 @@ const DeleteConfirmation = ({ blogID, setDeletePopup }: DeleteConfirmationProps)
      const { theme } = useContext(ThemeContext);
 
      const handleDelete = async (id: string) => {
-          deleteBlog(id);
+          await deleteBlog(id);
           setDeletePopup(false);
+          window.location.reload();
      }
 
      return (
