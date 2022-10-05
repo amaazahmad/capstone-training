@@ -6,6 +6,8 @@ import { useOutletContext } from "react-router-dom"
 import Switch from "react-switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { Bars } from 'react-loader-spinner'
+
 
 
 //components
@@ -26,6 +28,7 @@ const HomePage = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
 	const [blogs, setBlogs] = useState<BlogData[] | null>(null)
 	const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
+	const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
 	const refSearchBar = useRef<HTMLInputElement>(null);
 
 	type OutletContextType = [
@@ -44,10 +47,12 @@ const HomePage = () => {
 	useEffect(() => {
 
 		const getBlogsAtHomePage = async () => {
+			setLoaderVisible(true)
 			const blogsRec = await getBlogs()
 			blogsRec.sort((objA, objB) => { return Number(objB.date) - Number(objA.date) })
 			setBlogs(blogsRec)
 			setFilteredBlogs(blogsRec)
+			setLoaderVisible(false)
 		}
 
 		getBlogsAtHomePage()
@@ -81,10 +86,10 @@ const HomePage = () => {
 	}
 
 	return (
-		<div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
-			<img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt="" />
-			<div className="flex flex-row w-full justify-between pr-8 pl-8 md:pl-0">
-				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>
+		<div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-16 md:mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
+			<img className="w-5 ml-4 md:ml-8 " src="/assets/icons/rectangle.svg" alt="" />
+			<div className="flex flex-row w-full justify-between pr-4 pl-4 md:pr-8 md:pl-8">
+				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6 `}>
 					Latest
 				</h1>
 				{screenWidth >= 768 ?
@@ -127,6 +132,7 @@ const HomePage = () => {
 					<></>
 				}
 			</div>
+			<Bars visible={loaderVisible} height="100" width="100" color="rgba(86, 204, 106, 1)" wrapperStyle={{ alignSelf: 'center', marginTop: '120px' }} />
 			<BlogList blogs={filteredBlogs} isMyBlogs={false} />
 		</div>
 	)

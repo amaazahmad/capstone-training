@@ -21,9 +21,9 @@ const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
 
 	useEffect(() => {
 		if (pageState === null) {
-			setPageState("Loading articles. Hold on.")
+			setPageState("loading")
 		} else {
-			if (blogs?.length) setPageState("Loading articles. Hold on.")
+			if (blogs?.length) setPageState("loading")
 			else setPageState("No blogs found.")
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -31,13 +31,11 @@ const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
 
 	return (
 		<div className="mb-5 mt-2 md:mt-8">
-			{blogs?.length ? (
+			{
 				blogs?.map((blog) => {
 					return <BlogListEntry key={blog.key} blog={blog} isMyBlog={isMyBlogs} />
 				})
-			) : (
-				<p className={`${theme ? "text-white" : "text-dark-gray-color"} pl-8 pt-8 text-xl font-normal font-lexend-deca box-border`}>{pageState}</p>
-			)}
+			}
 		</div>
 	)
 }

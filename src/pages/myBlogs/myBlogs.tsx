@@ -6,6 +6,7 @@ import { useOutletContext } from "react-router-dom"
 import Switch from "react-switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { Bars } from 'react-loader-spinner'
 
 //components
 import BlogList from "../../components/blogList/blogList"
@@ -26,6 +27,7 @@ const MyBlogs = () => {
      const { theme, setTheme } = useContext(ThemeContext);
      const [blogs, setBlogs] = useState<BlogData[] | null>(null)
      const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
+     const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
      const refSearchBar = useRef<HTMLInputElement>(null);
      const user = useContext(UserContext);
      const email = user?.currentUser?.email;
@@ -50,10 +52,12 @@ const MyBlogs = () => {
 
      useEffect(() => {
           const getBlogsAtHomePage = async () => {
+               setLoaderVisible(true)
                const blogsRec = await getBlogs(email)
                blogsRec.sort((objA, objB) => { return Number(objB.date) - Number(objA.date) })
                setBlogs(blogsRec)
                setFilteredBlogs(blogsRec)
+               setLoaderVisible(false)
           }
 
           getBlogsAtHomePage()
@@ -125,6 +129,7 @@ const MyBlogs = () => {
                          <></>
                     }
                </div>
+               <Bars visible={loaderVisible} height="100" width="100" color="rgba(86, 204, 106, 1)" wrapperStyle={{ alignSelf: 'center', marginTop: '120px' }} />
                <BlogList blogs={filteredBlogs} isMyBlogs={true} />
           </div>
      )
