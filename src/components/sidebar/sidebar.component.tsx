@@ -63,13 +63,14 @@ const Sidebar = () => {
 					onClose={() => { setCreateBlogPopup(false) }}
 					contentStyle={{ padding: 0, border: 0, width: '55%', height: '70%' }}
 					modal
-					closeOnDocumentClick
+					closeOnDocumentClick={false}
 					repositionOnResize
 					trigger={<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12">
 						<img className="w-8" src="/assets/icons/add_circle.svg" alt="" />
 						<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">create</p>
 					</div>}
 				>
+					<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setCreateBlogPopup(false) }}>&times;</button>
 					<EditBlog setEditPopup={setCreateBlogPopup} />
 				</Popup>
 

@@ -62,10 +62,11 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						onClose={() => { setEditPopup(false) }}
 						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0, width: '55%', height: '70%' } : { padding: 0, border: 0, width: '75%', height: '70%' }}
 						modal
-						closeOnDocumentClick
+						closeOnDocumentClick={false}
 						repositionOnResize
 						trigger={<img className='w-5 h-5 mr-4 md:w-6 md:h-6' src="/assets/icons/editIcon.png" alt="" />}
 					>
+						<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setEditPopup(false) }}>&times;</button>
 						<EditBlog blog={blog} setEditPopup={setEditPopup} />
 					</Popup>
 
@@ -76,10 +77,11 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						onClose={() => { setDeletePopup(false) }}
 						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0 } : { padding: 0, border: 0, width: '85%' }}
 						modal
-						closeOnDocumentClick
+						closeOnDocumentClick={false}
 						repositionOnResize
 						trigger={<img className='w-5 h-5 md:w-6 md:h-6 cursor-pointer' src="/assets/icons/redDeleteIcon.png" alt="" />}
 					>
+
 						<DeleteConfirmation setDeletePopup={setDeletePopup} blogID={blog.key} />
 					</Popup>
 
