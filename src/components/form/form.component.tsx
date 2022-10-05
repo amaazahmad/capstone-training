@@ -1,6 +1,8 @@
 import React from "react"
 
 import { FieldValues, useForm } from "react-hook-form"
+import { Bars } from 'react-loader-spinner'
+
 
 type FormFields = {
 	name: string
@@ -92,7 +94,7 @@ const Form = ({ fields, buttonText, buttonCustomStyle, onSubmitHandler }: FormPr
                     lg:h-16 lg:text-[20px] ` + buttonCustomStyle}
 					type="submit"
 				>
-					{isSubmitting ? "LOADING..." : buttonText}
+					{isSubmitting ? <Bars visible={true} height="30" width="30" color="rgba(86, 204, 106, 1)" wrapperStyle={{ justifyContent: 'center' }} /> : buttonText}
 				</button>
 			</form>
 		</div>

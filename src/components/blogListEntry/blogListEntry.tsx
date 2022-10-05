@@ -43,7 +43,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 	return (
 		<div className="box-border flex flex-col text-left pb-8 pl-4 pr-4 md:pl-8 md:pr-8 ">
 			{screenWidth >= 768 ?
-				<p className={`${theme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-8 `}>
+				<p className={`${theme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-4 `}>
 					{dateToDisplay}
 				</p>
 				:
