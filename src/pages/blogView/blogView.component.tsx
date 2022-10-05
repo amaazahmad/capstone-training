@@ -1,20 +1,61 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import { useLocation, useNavigate } from "react-router-dom"
 
 import { ThemeContext } from "../../context/theme/theme.context"
+import { BlogData } from "../../types/blog/blog"
+
+import { getBlogByID } from "../../utils/firebase/firebaseDB.utils"
 
 const BlogView = () => {
      const { theme } = useContext(ThemeContext);
      const location = useLocation()
      const navigate = useNavigate();
-     const { blog } = location.state
-     const { title, date, email, content } = blog;
-     const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+
+     const [title, setTitle] = useState<string>("")
+     const [content, setContent] = useState<string>("")
+     const [email, setEmail] = useState<string>("")
+     const [date, setDate] = useState<string>("")
+
 
      const backButtonClickHandler = () => {
           navigate(-1);
      }
+
+     useEffect(() => {
+
+          const getBlogData = async () => {
+               if (location.state) {
+                    const { blog } = location.state
+                    const { title, date, email, content } = blog;
+                    const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+                    setTitle(title);
+                    setDate(dateToDisplay)
+                    setEmail(email)
+                    setContent(content)
+               } else {
+                    let ID = location.pathname.slice(location.pathname.lastIndexOf("/") + 1, location.pathname.length);
+                    const blog = await getBlogByID(ID)
+                    if (blog) {
+                         console.log(blog?.date)
+                         // const datee = new Date(blog?.date);
+                         const dateToDisplay = blog?.date.toDate().toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+                         setTitle(blog?.title);
+                         setDate(dateToDisplay)
+                         setEmail(blog?.email)
+                         setContent(blog?.content)
+                    }
+                    else {
+                         alert("Failed to fetch blog.")
+                         setTitle("Failed to fetch blog.")
+                    }
+
+               }
+          }
+
+          getBlogData();
+     })
+
 
      return (
           <div className={`h-screen w-screen bottom-0 flex flex-col box-border pb-12 pt-12 xl:flex-row xl:pt-16 xl:overflow-scroll ${theme ? " bg-dark-gray-text-color" : ""}`}>
@@ -27,7 +68,7 @@ const BlogView = () => {
                     <h1 className="font-dm-serif-display font-normal text-3xl leading-[44px] text-green-text-color text-left mb-2 xl:text-[40px] xl:leading-[55px]">{title}</h1>
 
                     <p className=" font-lexend-deca font-[200] text-base leading-7 text-secondary-text-color xl:text-xl xl:leading-6">{`written by ${email}`}</p>
-                    <p className="font-lexend-deca font-[200] text-base leading-7 text-secondary-text-color xl:text-xl xl:leading-6">{`on ${dateToDisplay}`}</p>
+                    <p className="font-lexend-deca font-[200] text-base leading-7 text-secondary-text-color xl:text-xl xl:leading-6">{`on ${date}`}</p>
                     <p className={` whitespace-pre-wrap w-full font-lexend-deca font-normal text-xl leading-8 text-left mt-10 first-letter:text-[64px] xl:text-2xl xl:leading-9 ${theme ? "text-white" : " text-dark-gray-text-color"}`}>{content}</p>
                </div>
                <div className="hidden xl:flex xl:mr-[52px] xl:h-full xl:min-w-[15%]"></div>

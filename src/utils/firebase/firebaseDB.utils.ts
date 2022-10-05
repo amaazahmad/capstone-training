@@ -7,7 +7,8 @@ import {
 	doc, 
 	deleteDoc,
 	addDoc,
-	updateDoc
+	updateDoc,
+	getDoc
 } from "firebase/firestore"
 
 const db = getFirestore()
@@ -26,6 +27,25 @@ export const getBlogs = async (emailFilter:string|null="") => {
 	})
 }
 
+export const getBlogByID = async (blogID:string) => {
+	// const collectionRef = collection(db, "blogs")
+	// const queryResponse =  blogID? query(collectionRef, where('key','==',blogID) ):query(collectionRef) 
+
+	// const querySnapshotDocs = (await getDocs(queryResponse)).docs
+
+	// const {title, email, content, date} = querySnapshotDocs[0].data();
+	// 	const returnObj = {title,email,content,date:date.toDate(), key:querySnapshotDocs[0].id}
+	// 	return returnObj;
+	const docRef = doc(db,'blogs',blogID);
+	try {
+		const docSnap = await getDoc(docRef);
+		return docSnap.data();
+	 } catch(error) {
+		return undefined;
+	 }
+
+}
+
 export const deleteBlog = async (blogID:string) => {
 	await deleteDoc(doc(db,"blogs",blogID))
 }
@@ -33,14 +53,14 @@ export const deleteBlog = async (blogID:string) => {
 export const createBlog = async(title:string, content:string, email:string, date:Date )=>{
 	try{
 		const collectionRef = collection(db, "blogs")
-		await addDoc(collectionRef,{
+		const response = await addDoc(collectionRef,{
 			title,
 			content,
 			email,
 			date
 		});
 
-		return "success";
+		return response.id;
 	} catch(e) {
 		return e
 	}

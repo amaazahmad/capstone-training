@@ -92,7 +92,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 			<TextTruncate
 				containerClassName={`${theme ? "text-white" : "text-dark-gray-text-color"} whitespace-pre-wrap font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
 				md:text-[20px] md:leading-[25px]`}
-				line={screenWidth < 768 ? 9 : 5} element="p" truncateText='' text={content}
+				line={screenWidth < 768 ? 6 : 3} element="p" truncateText='' text={content}
 				textTruncateChild={
 					<Link className='font-lexend-deca not-italic font-normal text-base leading-5 text-green-text-color cursor-pointer md:text-xl md:leading-6'
 						to={`/blog/${blog.key}`} state={{ blog }}>...read more

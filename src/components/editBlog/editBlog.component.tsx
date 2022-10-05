@@ -2,6 +2,7 @@ import Form from "../form/form.component"
 import { getAuth } from "firebase/auth"
 import { FieldValues } from "react-hook-form"
 
+import { useNavigate } from "react-router-dom"
 
 import { BlogData } from '../../types/blog/blog'
 import { useContext } from "react"
@@ -17,6 +18,7 @@ type EditBlogProps = {
 const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
 
      const { theme } = useContext(ThemeContext)
+     const navigate = useNavigate();
      const auth = getAuth()
 
      const EditBlogFields = [
@@ -53,7 +55,7 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                //updating an existing blog
                const response = await updateBlog(blog.key, data.title, data.content)
                if (response === 'success') {
-                    window.location.reload();
+                    navigate(`/blog/${blog.key}`)
                } else {
                     alert(`Failed to update blog: ${response}`)
                }
