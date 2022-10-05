@@ -1,11 +1,8 @@
 //react imports
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 
 //components
 import BlogListEntry from "../blogListEntry/blogListEntry"
-
-//contexts
-import { ThemeContext } from '../../context/theme/theme.context'
 
 //types
 import { BlogData } from '../../types/blog/blog'
@@ -17,7 +14,6 @@ type BlogListProps = {
 
 const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string | null>(null)
-	const { theme } = useContext(ThemeContext)
 
 	useEffect(() => {
 		if (pageState === null) {
