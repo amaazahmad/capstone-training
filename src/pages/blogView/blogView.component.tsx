@@ -28,7 +28,7 @@ const BlogView = () => {
 
                     <p className=" font-lexend-deca font-[200] text-base leading-7 text-secondary-text-color xl:text-xl xl:leading-6">{`written by ${email}`}</p>
                     <p className="font-lexend-deca font-[200] text-base leading-7 text-secondary-text-color xl:text-xl xl:leading-6">{`on ${dateToDisplay}`}</p>
-                    <p className={`w-full font-lexend-deca font-normal text-xl leading-8 text-left mt-10 first-letter:text-[64px] xl:text-2xl xl:leading-9 ${theme ? "text-white" : " text-dark-gray-text-color"}`}>{content}</p>
+                    <p className={` whitespace-pre-wrap w-full font-lexend-deca font-normal text-xl leading-8 text-left mt-10 first-letter:text-[64px] xl:text-2xl xl:leading-9 ${theme ? "text-white" : " text-dark-gray-text-color"}`}>{content}</p>
                </div>
                <div className="hidden xl:flex xl:mr-[52px] xl:h-full xl:min-w-[15%]"></div>
 

@@ -40,7 +40,6 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 		return (() => { window.removeEventListener('resize', updateScreenSize) })
 	})
 
-
 	return (
 		<div className="box-border flex flex-col text-left pl-8 pr-8 pb-8">
 			{screenWidth >= 768 ?
@@ -89,7 +88,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 
 			</div>
 			<TextTruncate
-				containerClassName={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
+				containerClassName={`${theme ? "text-white" : "text-dark-gray-text-color"} whitespace-pre-wrap font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
 				md:text-[20px] md:leading-[25px]`}
 				line={screenWidth < 768 ? 9 : 5} element="p" truncateText='' text={content}
 				textTruncateChild={
