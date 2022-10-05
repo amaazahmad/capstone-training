@@ -7,7 +7,7 @@ import { BlogData } from '../../types/blog/blog'
 import { useContext } from "react"
 import { ThemeContext } from "../../context/theme/theme.context"
 
-import { createBlog } from '../../utils/firebase/firebaseDB.utils'
+import { createBlog, updateBlog } from '../../utils/firebase/firebaseDB.utils'
 
 type EditBlogProps = {
      blog?: BlogData;
@@ -50,7 +50,12 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
      const onSubmitHandler = async (data: FieldValues) => {
           if (blog) {
                //updating an existing blog
-
+               const response = await updateBlog(blog.key, data.title, data.content)
+               if (response === 'success') {
+                    window.location.reload();
+               } else {
+                    alert(`Failed to update blog: ${response}`)
+               }
           }
           else {
                // creating a new blog

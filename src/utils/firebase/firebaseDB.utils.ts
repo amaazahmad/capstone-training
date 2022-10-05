@@ -6,7 +6,8 @@ import {
 	where,
 	doc, 
 	deleteDoc,
-	addDoc
+	addDoc,
+	updateDoc
 } from "firebase/firestore"
 
 const db = getFirestore()
@@ -43,4 +44,16 @@ export const createBlog = async(title:string, content:string, email:string, date
 	} catch(e) {
 		return e
 	}
+}
+
+export const updateBlog = async(key:string, title:string, content:string)=>{
+	try{
+		const blogRef = doc(db,'blogs',key)
+		await updateDoc(blogRef,{title, content})
+		return 'success'
+	}catch(e){
+		return e;
+	}
+	
+	
 }
