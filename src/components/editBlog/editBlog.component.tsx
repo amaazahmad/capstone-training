@@ -65,8 +65,8 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                const userEmail = auth.currentUser?.email || "";
                const now = new Date();
                const response = await createBlog(data.title, data.content, userEmail, now)
-               if (response === 'success') {
-                    window.location.reload();
+               if (response) {
+                    navigate(`/blog/${response}`)
                } else {
                     alert(`Failed to create blog: ${response}`)
                }

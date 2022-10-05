@@ -28,14 +28,6 @@ export const getBlogs = async (emailFilter:string|null="") => {
 }
 
 export const getBlogByID = async (blogID:string) => {
-	// const collectionRef = collection(db, "blogs")
-	// const queryResponse =  blogID? query(collectionRef, where('key','==',blogID) ):query(collectionRef) 
-
-	// const querySnapshotDocs = (await getDocs(queryResponse)).docs
-
-	// const {title, email, content, date} = querySnapshotDocs[0].data();
-	// 	const returnObj = {title,email,content,date:date.toDate(), key:querySnapshotDocs[0].id}
-	// 	return returnObj;
 	const docRef = doc(db,'blogs',blogID);
 	try {
 		const docSnap = await getDoc(docRef);
