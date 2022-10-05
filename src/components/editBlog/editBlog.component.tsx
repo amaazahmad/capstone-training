@@ -29,8 +29,8 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                     message: 'Title can not be empty.'
                },
                defaultValue: blog?.title,
-               styles: `${theme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} box-border w-full not-italic  outline-none leading-5 text-base m-0 p-4 border-2 border-solid  font-lexend-deca  placeholder-secondary-text-color
-               sm:self-start sm:ml-0 sm:text-sm  lg:text-lg `
+               styles: `${theme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} box-border w-full not-italic  outline-none leading-5 text-base m-0 p-4 border-2 border-solid  font-lexend-deca  placeholder-secondary-text-color w-[110%]
+               sm:self-start sm:ml-0 sm:text-sm sm:w-full lg:text-lg `
           },
           {
                name: "content",
@@ -41,15 +41,14 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                     message: "Blog content can not be empty.",
                },
                defaultValue: blog?.content,
-               styles: `${theme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} box-border w-full not-italic  outline-none leading-5 text-base m-0 p-4 border-2 border-solid  font-lexend-deca  placeholder-secondary-text-color
-               h-[75%]
-               sm:self-start sm:ml-0 sm:text-sm  lg:text-lg `
+               styles: `${theme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} 
+               box-border w-full not-italic  outline-none leading-5 text-base m-0 p-4 border-2 border-solid  font-lexend-deca  placeholder-secondary-text-color h-[75%] w-[110%]
+               sm:self-start sm:ml-0 sm:text-sm  sm:w-full
+               lg:text-lg `
           },
      ]
 
      const onSubmitHandler = async (data: FieldValues) => {
-          // console.log(data.content.includes("n"))
-          // data.content.replaceAll("\n", "\\n");
           if (blog) {
                //updating an existing blog
                const response = await updateBlog(blog.key, data.title, data.content)
@@ -73,11 +72,12 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
      }
 
      return (
-          <div className={`${theme ? "bg-dark-gray-text-color" : "bg-white"} border-solid border-4 border-green-text-color pl-2 pr-2 pt-6 pb-6 font-lexend-deca flex flex-col items-center justify-center h-[100%] sm:p-8`}>
+          <div className={`${theme ? "bg-dark-gray-text-color" : "bg-white"} border-solid border-4 border-green-text-color pl-0 pr-0 pt-6 pb-6 font-lexend-deca flex flex-col items-center justify-center h-[100%] sm:p-8`}>
                <Form
                     fields={EditBlogFields}
-                    buttonText="Submit"
+                    buttonText={blog ? "SAVE" : "CREATE"}
                     onSubmitHandler={onSubmitHandler}
+                    buttonCustomStyle="sm:self-end"
                ></Form>
           </div>
      )

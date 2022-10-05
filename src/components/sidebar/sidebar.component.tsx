@@ -32,7 +32,8 @@ const Sidebar = () => {
 	}
 
 	const userIconClickHandler = () => {
-		location.pathname !== '/my-blogs' && navigate('/my-blogs');
+		location.pathname !== '/my-blogs' ? navigate('/my-blogs') : navigate("/");
+
 	}
 
 	const searchClickHandler = () => {
@@ -60,7 +61,7 @@ const Sidebar = () => {
 					open={createBlogPopup}
 					onOpen={() => { setCreateBlogPopup(true) }}
 					onClose={() => { setCreateBlogPopup(false) }}
-					contentStyle={{ padding: 0, border: 0 }}
+					contentStyle={{ padding: 0, border: 0, width: '55%', height: '70%' }}
 					modal
 					closeOnDocumentClick
 					repositionOnResize

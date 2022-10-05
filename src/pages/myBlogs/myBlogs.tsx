@@ -83,10 +83,10 @@ const MyBlogs = () => {
      }
 
      return (
-          <div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
-               <img className="w-5 ml-8 " src="/assets/icons/rectangle.svg" alt=""></img>
-               <div className="flex flex-row w-full justify-between pr-8 pl-8 md:pl-0">
-                    <h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6  md:ml-8`}>My Blogs</h1>
+          <div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-16 md:mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
+               <img className="w-5 ml-4 md:ml-8" src="/assets/icons/rectangle.svg" alt=""></img>
+               <div className="flex flex-row w-full justify-between pr-4 pl-4 md:pr-8 md:pl-8">
+                    <h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6 `}>My Blogs</h1>
                     {screenWidth >= 768 ?
                          <div>
                               <input

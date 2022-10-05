@@ -41,7 +41,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 	})
 
 	return (
-		<div className="box-border flex flex-col text-left pl-8 pr-8 pb-8">
+		<div className="box-border flex flex-col text-left pb-8 pl-4 pr-4 md:pl-8 md:pr-8 ">
 			{screenWidth >= 768 ?
 				<p className={`${theme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-8 `}>
 					{dateToDisplay}
@@ -60,7 +60,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						open={editPopup}
 						onOpen={() => { setEditPopup(true) }}
 						onClose={() => { setEditPopup(false) }}
-						contentStyle={{ padding: 0, border: 0, width: '85%', height: '65%' }}
+						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0, width: '55%', height: '70%' } : { padding: 0, border: 0, width: '75%', height: '70%' }}
 						modal
 						closeOnDocumentClick
 						repositionOnResize
@@ -74,7 +74,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						open={deletePopup}
 						onOpen={() => { setDeletePopup(true) }}
 						onClose={() => { setDeletePopup(false) }}
-						contentStyle={{ padding: 0, border: 0, }}
+						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0 } : { padding: 0, border: 0, width: '85%' }}
 						modal
 						closeOnDocumentClick
 						repositionOnResize

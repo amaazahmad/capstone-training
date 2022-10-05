@@ -30,7 +30,7 @@ const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
 	}, [blogs?.length])
 
 	return (
-		<div className="mb-5 mt-8">
+		<div className="mb-5 mt-2 md:mt-8">
 			{blogs?.length ? (
 				blogs?.map((blog) => {
 					return <BlogListEntry key={blog.key} blog={blog} isMyBlog={isMyBlogs} />
