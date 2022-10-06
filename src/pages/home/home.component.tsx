@@ -8,8 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Bars } from 'react-loader-spinner'
 
-
-
 //components
 import BlogList from "../../components/blogList/blogList"
 

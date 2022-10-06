@@ -38,7 +38,6 @@ const BlogView = () => {
                     let ID = location.pathname.slice(location.pathname.lastIndexOf("/") + 1, location.pathname.length);
                     const blog = await getBlogByID(ID)
                     if (blog) {
-                         console.log("BLOG FOUND");
                          const dateToDisplay = blog?.date.toDate().toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
                          setTitle(blog?.title);
                          setDate(dateToDisplay)

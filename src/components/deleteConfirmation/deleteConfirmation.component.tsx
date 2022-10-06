@@ -4,7 +4,6 @@ import { Bars } from 'react-loader-spinner'
 
 import { ThemeContext } from '../../context/theme/theme.context';
 
-//firebase utils
 import { deleteBlog } from '../../utils/firebase/firebaseDB.utils'
 
 type DeleteConfirmationProps = {

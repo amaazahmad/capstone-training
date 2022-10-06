@@ -5,7 +5,6 @@ import { useEffect, useState, useContext } from 'react';
 import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 
 //local components
 import DeleteConfirmation from '../deleteConfirmation/deleteConfirmation.component';
