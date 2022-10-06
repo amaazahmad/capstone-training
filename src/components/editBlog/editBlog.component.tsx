@@ -73,13 +73,15 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
           }
      }
 
+
      return (
           <div className={`${theme ? "bg-dark-gray-text-color" : "bg-white"} border-solid border-4 border-green-text-color pl-0 pr-0 pt-6 pb-6 font-lexend-deca flex flex-col items-center justify-center h-[100%] sm:p-8`}>
                <Form
                     fields={EditBlogFields}
                     buttonText={blog ? "SAVE" : "ADD"}
                     onSubmitHandler={onSubmitHandler}
-                    buttonCustomStyle={`sm:self-end`}
+                    cancelButton
+                    onCancelHandler={() => { setEditPopup(false) }}
                ></Form>
           </div>
      )

@@ -81,6 +81,7 @@ const MyBlogs = () => {
      }
 
      const clearSearchClickHandler = () => {
+          console.log("CLICKED")
           if (refSearchBar.current?.value)
                refSearchBar.current.value = "";
           setFilteredBlogs(blogs);
@@ -123,7 +124,7 @@ const MyBlogs = () => {
                               >
 
                               </input>
-                              <FontAwesomeIcon className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
+                              <FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
                          </div>
                          :
                          <></>

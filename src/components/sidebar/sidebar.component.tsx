@@ -1,5 +1,5 @@
 //react imports
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 
 //third party packages
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
@@ -8,13 +8,12 @@ import 'reactjs-popup/dist/index.css';
 
 //local components
 import EditBlog from "../editBlog/editBlog.component";
+import SignoutWarning from "../signoutWarning/signoutWarning";
 
 //contexts
 import { UserContext } from "../../context/user/user.context"
 import { ThemeContext } from "../../context/theme/theme.context"
 
-//utils
-import { signOutUser } from "../../utils/firebase/firebase.utils"
 
 const Sidebar = () => {
 	const navigate = useNavigate();
@@ -23,13 +22,18 @@ const Sidebar = () => {
 	const user = useContext(UserContext);
 	const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
 	const [createBlogPopup, setCreateBlogPopup] = useState<boolean>(false);
+	const [signoutWarning, setSignoutoutWarning] = useState<boolean>(false);
 	const displayName = user?.currentUser?.displayName
-	const signOutHandler = () => {
-		const response = signOutUser()
+	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 
-		if (!(response instanceof Error)) navigate("/login")
-
+	const updateScreenSize = () => {
+		setScreenWidth(window.innerWidth);
 	}
+
+	useEffect(() => {
+		window.addEventListener('resize', updateScreenSize);
+		return (() => { window.removeEventListener('resize', updateScreenSize) })
+	})
 
 	const userIconClickHandler = () => {
 		location.pathname !== '/my-blogs' ? navigate('/my-blogs') : navigate("/");
@@ -61,7 +65,7 @@ const Sidebar = () => {
 					open={createBlogPopup}
 					onOpen={() => { setCreateBlogPopup(true) }}
 					onClose={() => { setCreateBlogPopup(false) }}
-					contentStyle={{ padding: 0, border: 0, width: '55%', height: '70%' }}
+					contentStyle={{ padding: 0, border: 0, width: '75%', height: '70%' }}
 					modal
 					closeOnDocumentClick={false}
 					repositionOnResize
@@ -74,13 +78,30 @@ const Sidebar = () => {
 					<EditBlog setEditPopup={setCreateBlogPopup} />
 				</Popup>
 
+				<Popup
+					defaultOpen={signoutWarning}
+					open={signoutWarning}
+					onOpen={() => { setSignoutoutWarning(true) }}
+					onClose={() => { setSignoutoutWarning(false) }}
+					contentStyle={screenWidth >= 768 ? { padding: 0, border: 0 } : { padding: 0, border: 0, width: '85%' }}
+					modal
+					closeOnDocumentClick={false}
+					repositionOnResize
+					trigger={
+						<div className="cursor-pointer md:flex md:flex-row md:items-center xl:flex xl:flex-col xl:items-center xl:mt-auto xl:mb-8" >
+							<img className="w-8" src="/assets/icons/logout.png" alt="" />
+							<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">signout</p>
+						</div>
+					}
+				>
+					<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setSignoutoutWarning(false) }}>&times;</button>
+					<SignoutWarning setSignoutWarning={setSignoutoutWarning} />
+				</Popup>
 
 
 
-				<div className="cursor-pointer md:flex md:flex-row md:items-center xl:flex xl:flex-col xl:items-center xl:mt-auto xl:mb-8" onClick={signOutHandler}>
-					<img className="w-8" src="/assets/icons/logout.png" alt="" />
-					<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">signout</p>
-				</div>
+
+
 
 
 

@@ -124,7 +124,7 @@ const HomePage = () => {
 						>
 
 						</input>
-						<FontAwesomeIcon className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
+						<FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
 					</div>
 
 

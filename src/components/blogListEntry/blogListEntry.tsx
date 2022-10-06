@@ -51,7 +51,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 			}
 			<div className="w-full flex flex-row justify-between">
 				<Link to={`/blog/${blog.key}`} state={{ blog }} style={{ width: '100%' }}>
-					<h1 className=" w-4/5 font-dm-serif-display not-italic font-normal text-2xl text-green-text-color mb-[10px] mt-0 cursor-pointer
+					<h1 className=" w-4/5 font-dm-serif-display not-italic font-normal text-2xl  text-green-text-color mb-[10px] mt-0 cursor-pointer
 						md:text-[32px] md:leading-[44px] xl:mt-[10px] xl:mb-4">{title}</h1>
 				</Link>
 				{isMyBlog && <div className='w-1/5 flex flex-row pt-2 justify-end'>
@@ -60,7 +60,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						open={editPopup}
 						onOpen={() => { setEditPopup(true) }}
 						onClose={() => { setEditPopup(false) }}
-						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0, width: '55%', height: '70%' } : { padding: 0, border: 0, width: '75%', height: '70%' }}
+						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0, width: '75%', height: '70%' } : { padding: 0, border: 0, width: '75%', height: '70%' }}
 						modal
 						closeOnDocumentClick={false}
 						repositionOnResize

@@ -23,11 +23,12 @@ type FormFields = {
 type FormProps = {
 	fields: FormFields[]
 	buttonText: string
-	buttonCustomStyle?: string
+	cancelButton?: boolean
 	onSubmitHandler: (data: FieldValues) => {}
+	onCancelHandler?: () => void
 }
 
-const Form = ({ fields, buttonText, buttonCustomStyle, onSubmitHandler }: FormProps) => {
+const Form = ({ fields, buttonText, cancelButton, onCancelHandler, onSubmitHandler }: FormProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -87,15 +88,36 @@ const Form = ({ fields, buttonText, buttonCustomStyle, onSubmitHandler }: FormPr
 						</React.Fragment>
 					)
 				})}
-				<button
-					className={`box-border w-full bg-dark-gray-text-color opacity-100 border border-white font-lexend-deca not-italic font-semibold text-white text-base p-4 ml-0
-                    hover:text-dark-gray-text-color hover:bg-white hover:border hover:border-solid hover:border-dark-gray-text-color hover:cursor-pointer
-                    sm:h-[60px] sm:w-48 sm:self-start sm:text-[16px] 
-                    lg:h-16 lg:text-[20px] ` + buttonCustomStyle}
-					type="submit"
-				>
-					{isSubmitting ? <Bars visible={true} height="24" width="30" color="rgba(86, 204, 106, 1)" wrapperStyle={{ justifyContent: 'center' }} /> : buttonText}
-				</button>
+				<div className={`${cancelButton ? "sm:flex-row-reverse sm:justify-around" : "sm:justify-start"} flex flex-col w-full justify-evenly`}>
+					<button
+						className={`box-border w-full bg-dark-gray-text-color opacity-100 border border-white font-lexend-deca not-italic font-semibold text-white text-base p-4 ml-0
+							hover:text-dark-gray-text-color hover:bg-white hover:border hover:border-solid hover:border-dark-gray-text-color hover:cursor-pointer
+							sm:h-[60px] sm:w-40 sm:text-[16px] 
+							lg:w-48
+							lg:h-16 lg:text-[20px]`}
+						type="submit"
+					>
+						{isSubmitting ? <Bars visible={true} height="24" width="30" color="rgba(86, 204, 106, 1)" wrapperStyle={{ justifyContent: 'center' }} /> : buttonText}
+					</button>
+
+					{cancelButton ?
+						<button
+							className={`box-border w-full bg-dark-gray-text-color opacity-100 border border-white font-lexend-deca not-italic font-semibold text-white text-base p-4 ml-0 mt-3 
+								hover:text-dark-gray-text-color hover:bg-white hover:border hover:border-solid hover:border-dark-gray-text-color hover:cursor-pointer
+								sm:h-[60px] sm:w-40 sm:text-[16px] sm:mt-0
+								
+								lg:h-16 lg:text-[20px] lg:w-48`}
+							onClick={onCancelHandler}
+							type="button"
+
+						>
+							CANCEL
+						</button>
+						:
+						<></>
+					}
+				</div>
+
 			</form>
 		</div>
 	)
