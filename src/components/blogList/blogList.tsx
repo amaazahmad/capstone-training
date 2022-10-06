@@ -1,13 +1,9 @@
-//react imports
 import { useContext, useEffect, useState } from "react"
 
-//components
 import BlogListEntry from "../blogListEntry/blogListEntry"
 
-//types
 import { BlogData } from '../../types/blog/blog'
 
-//contexts
 import { ThemeContext } from "../../context/theme/theme.context"
 
 type BlogListProps = {

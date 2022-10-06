@@ -1,23 +1,17 @@
-//react imports
 import React, { useEffect, useState, useRef, useContext } from "react"
 
-//third party packes
 import { useOutletContext } from "react-router-dom"
 import Switch from "react-switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Bars } from 'react-loader-spinner'
 
-//components
 import BlogList from "../../components/blogList/blogList"
 
-//contexts
 import { ThemeContext } from "../../context/theme/theme.context"
 
-//utils
 import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
 
-//types
 import { BlogData } from '../../types/blog/blog'
 
 

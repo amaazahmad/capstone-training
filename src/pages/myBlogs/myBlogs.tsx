@@ -1,24 +1,18 @@
-//react imports
 import React, { useEffect, useState, useRef, useContext } from "react"
 
-//third party packes
 import { useOutletContext } from "react-router-dom"
 import Switch from "react-switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Bars } from 'react-loader-spinner'
 
-//components
 import BlogList from "../../components/blogList/blogList"
 
-//contexts
 import { ThemeContext } from "../../context/theme/theme.context"
 import { UserContext } from "../../context/user/user.context";
 
-//utils
 import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
 
-//types
 import { BlogData } from '../../types/blog/blog'
 
 const MyBlogs = () => {
@@ -81,7 +75,6 @@ const MyBlogs = () => {
      }
 
      const clearSearchClickHandler = () => {
-          console.log("CLICKED")
           if (refSearchBar.current?.value)
                refSearchBar.current.value = "";
           setFilteredBlogs(blogs);

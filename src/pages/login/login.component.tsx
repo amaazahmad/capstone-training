@@ -1,13 +1,10 @@
 import React, { useState } from "react"
 
-//third party imports
 import { FieldValues } from "react-hook-form"
 import { useNavigate, Link } from "react-router-dom"
 
-//components
 import Form from "../../components/form/form.component"
 
-//utils
 import { signInUser } from "../../utils/firebase/firebase.utils"
 
 const LoginPage = () => {
@@ -82,7 +79,7 @@ const LoginPage = () => {
 						fields={LoginFormFields}
 						buttonText="LOGIN"
 						onSubmitHandler={onSubmitHandler}
-					></Form>
+					/>
 					<p className="m-0 mt-0.5 p-0 text-left self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
 						{errorMessage}
 					</p>

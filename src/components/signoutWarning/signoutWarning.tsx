@@ -1,10 +1,8 @@
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom"
 
-
 import { ThemeContext } from '../../context/theme/theme.context';
 
-//utils
 import { signOutUser } from "../../utils/firebase/firebase.utils"
 
 type SignoutWarningProps = {

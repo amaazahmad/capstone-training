@@ -1,13 +1,10 @@
 import { useState } from "react"
 
-// third party packes
 import { FieldValues } from "react-hook-form"
 import { useNavigate, Link } from "react-router-dom"
 
-//components
 import Form from "../../components/form/form.component"
 
-//utils
 import { createUserAccount } from "../../utils/firebase/firebase.utils"
 
 const SignupPage = () => {
@@ -99,7 +96,7 @@ const SignupPage = () => {
 						fields={SignupFormFields}
 						buttonText="SUBMIT"
 						onSubmitHandler={onSubmitHandler}
-					></Form>
+					/>
 					<p className="m-0 mt-0.5 p-0 text-left self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
 						{errorMessage}
 					</p>

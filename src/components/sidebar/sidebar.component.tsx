@@ -1,16 +1,12 @@
-//react imports
 import { useContext, useState, useEffect } from "react"
 
-//third party packages
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-//local components
 import EditBlog from "../editBlog/editBlog.component";
 import SignoutWarning from "../signoutWarning/signoutWarning";
 
-//contexts
 import { UserContext } from "../../context/user/user.context"
 import { ThemeContext } from "../../context/theme/theme.context"
 

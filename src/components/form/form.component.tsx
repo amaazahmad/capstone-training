@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 
 import { FieldValues, useForm } from "react-hook-form"
 import { Bars } from 'react-loader-spinner'
@@ -43,49 +43,49 @@ const Form = ({ fields, buttonText, cancelButton, onCancelHandler, onSubmitHandl
 					await onSubmitHandler(data)
 				})}
 			>
-				{fields.map((field: FormFields, index: number) => {
+				{fields.map(({ name, type, required, pattern, minLength, defaultValue, styles }) => {
 					const minLengthObj = {
-						value: field.minLength ? field.minLength.value : 0,
-						message: field.minLength ? field.minLength.message : "",
+						value: minLength ? minLength.value : 0,
+						message: minLength ? minLength.message : "",
 					}
 					const patternObj = {
-						value: field.pattern ? field.pattern.value : RegExp(".*?"),
-						message: field.pattern ? field.pattern.message : "",
+						value: pattern ? pattern.value : RegExp(".*?"),
+						message: pattern ? pattern.message : "",
 					}
 
 					return (
-						<React.Fragment key={field.name}>
-							{field.type === 'textarea' ?
-								<textarea className={field.styles}
-									defaultValue={field.defaultValue}
-									placeholder={`Enter your ${field.name}`}
-									{...register(field.name, {
-										required: field.required,
+						<Fragment key={name}>
+							{type === 'textarea' ?
+								<textarea className={styles}
+									defaultValue={defaultValue}
+									placeholder={`Enter your ${name}`}
+									{...register(name, {
+										required: required,
 										pattern: { ...patternObj },
 										minLength: { ...minLengthObj },
 									})}
 								/>
 								:
 								<input
-									className={field.styles}
-									type={field.type}
-									defaultValue={field.defaultValue}
+									className={styles}
+									type={type}
+									defaultValue={defaultValue}
 									placeholder={
-										field.name === "confirmPassword"
+										name === "confirmPassword"
 											? `Re-enter the password`
-											: `Enter your ${field.name}`
+											: `Enter your ${name}`
 									}
-									{...register(field.name, {
-										required: field.required,
+									{...register(name, {
+										required: required,
 										pattern: { ...patternObj },
 										minLength: { ...minLengthObj },
 									})}
-								></input>}
+								/>}
 
 							<p className="m-0 pt-0 pb-3 self-start text-base font-lexend-deca after:content-[''] after:inline-block lg:text-[18px]  text-red-700">
-								{errors[field.name] ? `${errors[field.name]?.message}` : ""}
+								{errors[name] ? `${errors[name]?.message}` : ""}
 							</p>
-						</React.Fragment>
+						</Fragment>
 					)
 				})}
 				<div className={`${cancelButton ? "sm:flex-row-reverse sm:justify-around" : "sm:justify-start"} flex flex-col w-full justify-evenly`}>
