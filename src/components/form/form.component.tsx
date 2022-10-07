@@ -17,7 +17,7 @@ type FormFields = {
 		message: string
 	}
 	defaultValue?: string
-	styles: string
+	styles?: string
 }
 
 type FormProps = {
@@ -67,7 +67,11 @@ const Form = ({ fields, buttonText, cancelButton, onCancelHandler, onSubmitHandl
 								/>
 								:
 								<input
-									className={styles}
+									className={styles ?
+										styles
+										:
+										"box-border w-full not-italic text-gray-900 outline-none leading-5 text-base m-0 p-4 border border-solid border-secondary-text-color font-lexend-deca focus:border-green-text-color placeholder-secondary-text-color sm:self-start sm:ml-0 sm:text-sm sm:h-12 lg:h-[60px] lg:text-lg lg:max-w-[600px]"
+									}
 									type={type}
 									defaultValue={defaultValue}
 									placeholder={

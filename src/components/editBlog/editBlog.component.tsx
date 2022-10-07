@@ -4,7 +4,6 @@ import { FieldValues } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { getAuth } from "firebase/auth"
 
-
 import Form from "../form/form.component"
 
 import { BlogData } from '../../types/blog/blog'
@@ -53,10 +52,10 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
           },
      ]
 
-     const onSubmitHandler = async (data: FieldValues) => {
+     const onSubmitHandler = async ({ title, content }: FieldValues) => {
           if (blog) {
                //updating an existing blog
-               const response = await updateBlog(blog.key, data.title, data.content)
+               const response = await updateBlog(blog.key, title, content)
                if (response === 'success') {
                     navigate(`/blog/${blog.key}`)
                } else {
@@ -67,7 +66,7 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                //creating a new blog
                const userEmail = auth.currentUser?.email || "";
                const now = new Date();
-               const response = await createBlog(data.title, data.content, userEmail, now)
+               const response = await createBlog(title, content, userEmail, now)
                if (response) {
                     navigate(`/blog/${response}`)
                } else {
@@ -85,7 +84,7 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                     onSubmitHandler={onSubmitHandler}
                     cancelButton
                     onCancelHandler={() => { setEditPopup(false) }}
-               ></Form>
+               />
           </div>
      )
 }

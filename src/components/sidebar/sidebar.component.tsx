@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react"
 
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 
 import EditBlog from "../editBlog/editBlog.component";
 import SignoutWarning from "../signoutWarning/signoutWarning";
@@ -15,15 +14,22 @@ const Sidebar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { theme } = useContext(ThemeContext);
-	const user = useContext(UserContext);
 	const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
 	const [createBlogPopup, setCreateBlogPopup] = useState<boolean>(false);
 	const [signoutWarning, setSignoutoutWarning] = useState<boolean>(false);
-	const displayName = user?.currentUser?.displayName
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
+	const displayName = useContext(UserContext)?.currentUser?.displayName
 
 	const updateScreenSize = () => {
 		setScreenWidth(window.innerWidth);
+	}
+
+	const userIconClickHandler = () => {
+		location.pathname !== '/my-blogs' ? navigate('/my-blogs') : navigate("/");
+	}
+
+	const searchClickHandler = () => {
+		setSearchBarVisible(!searchBarVisible);
 	}
 
 	useEffect(() => {
@@ -31,22 +37,13 @@ const Sidebar = () => {
 		return (() => { window.removeEventListener('resize', updateScreenSize) })
 	})
 
-	const userIconClickHandler = () => {
-		location.pathname !== '/my-blogs' ? navigate('/my-blogs') : navigate("/");
-
-	}
-
-	const searchClickHandler = () => {
-		setSearchBarVisible(!searchBarVisible);
-	}
-
 	return (
 		<div className="flex flex-col-reverse h-screen xl:flex-row z-10">
 
 			<div className={`${theme ? " shadow-sidebar-box-light-shadow" : "shadow-sidebar-box-dark-shadow"}  bg-dark-gray-text-color z-10 h-[7%] static flex flex-row justify-around items-center
 			xl:h-full xl:flex-col xl:justify-start xl:w-[8%]`}>
 				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >
-					<img className="w-8 xl:w-16 xl:mt-8 cursor-pointer" src="/assets/icons/ellipse.svg" alt="" onClick={userIconClickHandler}></img>
+					<img className="w-8 xl:w-16 xl:mt-8 cursor-pointer" src="/assets/icons/ellipse.svg" alt="" onClick={userIconClickHandler} />
 					<span className="text-white font-lexend-deca font-normal text-xl leading-6 absolute left-auto xl:mt-8 xl:text-3xl xl:leading-10 cursor-pointer" onClick={userIconClickHandler}>{displayName?.slice(0, 1).toUpperCase()} </span>
 					<p className="hidden md:fixed md:pl-20 md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-5 xl:hidden cursor-pointer" onClick={userIconClickHandler}>{displayName}</p>
 				</div>
@@ -93,14 +90,6 @@ const Sidebar = () => {
 					<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setSignoutoutWarning(false) }}>&times;</button>
 					<SignoutWarning setSignoutWarning={setSignoutoutWarning} />
 				</Popup>
-
-
-
-
-
-
-
-
 			</div>
 
 			<div className={`${theme ? " bg-dark-gray-text-color" : ""} overflow-scroll top-0 h-[93%] xl:w-[92%] xl:h-[100%]`}>

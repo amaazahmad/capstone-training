@@ -7,9 +7,10 @@ import Popup from 'reactjs-popup';
 import DeleteConfirmation from '../deleteConfirmation/deleteConfirmation.component';
 import EditBlog from '../editBlog/editBlog.component';
 
+import { BlogData } from '../../types/blog/blog'
+
 import { ThemeContext } from '../../context/theme/theme.context'
 
-import { BlogData } from '../../types/blog/blog'
 
 type BlogListEntryProps = {
 	blog: BlogData,
@@ -20,8 +21,8 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 
 	const { title, email, content, date } = blog;
 	const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric' }).toUpperCase();
-	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 	const { theme } = useContext(ThemeContext)
+	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 	const [deletePopup, setDeletePopup] = useState<boolean>(false);
 	const [editPopup, setEditPopup] = useState<boolean>(false);
 
@@ -48,7 +49,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 					<h1 className=" w-4/5 font-dm-serif-display not-italic font-normal text-2xl  text-green-text-color mb-[10px] mt-0 cursor-pointer
 						md:text-[32px] md:leading-[44px] xl:mt-[10px] xl:mb-4">{title}</h1>
 				</Link>
-				{isMyBlog && <div className='w-1/5 flex flex-row pt-2 justify-end'>
+				{isMyBlog ? <div className='w-1/5 flex flex-row pt-2 justify-end'>
 					<Popup
 						defaultOpen={editPopup}
 						open={editPopup}
@@ -80,7 +81,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 					</Popup>
 
 
-				</div>}
+				</div> : <></>}
 
 			</div>
 			<TextTruncate
@@ -88,10 +89,14 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 				md:text-[20px] md:leading-[25px]`}
 				line={screenWidth < 768 ? 6 : 3} element="p" truncateText='' text={content}
 				textTruncateChild={
-					<Link className='font-lexend-deca not-italic font-normal text-base leading-5 text-green-text-color cursor-pointer md:text-xl md:leading-6'
-						to={`/blog/${blog.key}`} state={{ blog }}>...read more
+					<Link
+						className='font-lexend-deca not-italic font-normal text-base leading-5 text-green-text-color cursor-pointer md:text-xl md:leading-6'
+						to={`/blog/${blog.key}`}
+						state={{ blog }}
+					>
+						...read more
 					</Link>}
-			></TextTruncate>
+			/>
 			<div className=' flex flex-row justify-between '>
 				{screenWidth < 768 ?
 					<p className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-semibold text-[16px] leading-5 `}>

@@ -8,23 +8,22 @@ import { Bars } from 'react-loader-spinner'
 
 import BlogList from "../../components/blogList/blogList"
 
+import { BlogData } from '../../types/blog/blog'
+
 import { ThemeContext } from "../../context/theme/theme.context"
 import { UserContext } from "../../context/user/user.context";
 
 import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
 
-import { BlogData } from '../../types/blog/blog'
 
 const MyBlogs = () => {
-
-
      const { theme, setTheme } = useContext(ThemeContext);
      const [blogs, setBlogs] = useState<BlogData[] | null>(null)
      const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
      const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
      const refSearchBar = useRef<HTMLInputElement>(null);
-     const user = useContext(UserContext);
-     const email = user?.currentUser?.email;
+     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
+     const email = useContext(UserContext)?.currentUser?.email;
 
 
      type OutletContextType = [
@@ -32,8 +31,6 @@ const MyBlogs = () => {
           setSearchBarVisible: (visible: boolean) => {}
      ]
      const [searchBarVisible, setSearchBarVisible] = useOutletContext<OutletContextType>()
-
-     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 
      const updateScreenSize = () => {
           setScreenWidth(window.innerWidth);
@@ -92,9 +89,7 @@ const MyBlogs = () => {
                                    ref={refSearchBar}
                                    className={`${searchBarVisible ? "mt-[40px] w-96 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
                                    onChange={searchChangeHandler}
-                              >
-
-                              </input>
+                              />
                               <FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
                          </div>
                          :
@@ -103,8 +98,8 @@ const MyBlogs = () => {
                     <Switch
                          checkedIcon={<img src="/assets/icons/sun.png" alt="" className="w-6 pt-1 pl-1" />}
                          uncheckedIcon={<img src="/assets/icons/moon.png" alt="" className="w-6 pt-1 pl-1" />}
-                         checked={theme} onChange={themeChangeHandler}>
-                    </Switch>
+                         checked={theme} onChange={themeChangeHandler}
+                    />
                </div>
                <div>
                     {screenWidth < 768 ?
@@ -114,9 +109,7 @@ const MyBlogs = () => {
                                    ref={refSearchBar}
                                    className={`${searchBarVisible ? "mt-[40px] w-64 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
                                    onChange={searchChangeHandler}
-                              >
-
-                              </input>
+                              />
                               <FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
                          </div>
                          :

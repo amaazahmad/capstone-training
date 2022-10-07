@@ -16,9 +16,7 @@ const SignoutWarning = ({ setSignoutWarning }: SignoutWarningProps) => {
 
      const signOutHandler = () => {
           const response = signOutUser()
-
           if (!(response instanceof Error)) navigate("/login")
-
      }
 
      return (
