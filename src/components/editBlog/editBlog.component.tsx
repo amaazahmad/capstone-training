@@ -33,8 +33,10 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                     message: 'Title can not be empty.'
                },
                defaultValue: blog?.title,
-               styles: `${isDarkTheme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} box-border w-full not-italic  outline-none leading-5 text-base m-0 p-4 border-2 border-solid  font-lexend-deca  placeholder-secondary-text-color w-[110%]
-               sm:self-start sm:ml-0 sm:text-sm sm:w-full lg:text-lg `
+               styles: `${isDarkTheme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} 
+               border-2 w-[110%]
+               sm:w-full
+               lg:text-lg lg:max-w-[none]`
           },
           {
                name: "content",
