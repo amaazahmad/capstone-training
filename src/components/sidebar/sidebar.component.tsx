@@ -13,8 +13,8 @@ import { ThemeContext } from "../../context/theme/theme.context"
 const Sidebar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { theme } = useContext(ThemeContext);
-	const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
+	const { isDarkTheme } = useContext(ThemeContext);
+	const [isSearchBarVisible, setIsSearchBarVisible] = useState<boolean>(false);
 	const [createBlogPopup, setCreateBlogPopup] = useState<boolean>(false);
 	const [signoutWarning, setSignoutoutWarning] = useState<boolean>(false);
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
@@ -29,7 +29,7 @@ const Sidebar = () => {
 	}
 
 	const searchClickHandler = () => {
-		setSearchBarVisible(!searchBarVisible);
+		setIsSearchBarVisible(!isSearchBarVisible);
 	}
 
 	useEffect(() => {
@@ -40,7 +40,7 @@ const Sidebar = () => {
 	return (
 		<div className="flex flex-col-reverse h-screen xl:flex-row z-10">
 
-			<div className={`${theme ? " shadow-sidebar-box-light-shadow" : "shadow-sidebar-box-dark-shadow"}  bg-dark-gray-text-color z-10 h-[7%] static flex flex-row justify-around items-center
+			<div className={`${isDarkTheme ? " shadow-sidebar-box-light-shadow" : "shadow-sidebar-box-dark-shadow"}  bg-dark-gray-text-color z-10 h-[7%] static flex flex-row justify-around items-center
 			xl:h-full xl:flex-col xl:justify-start xl:w-[8%]`}>
 				<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12" >
 					<img className="w-8 xl:w-16 xl:mt-8 cursor-pointer" src="/assets/icons/ellipse.svg" alt="" onClick={userIconClickHandler} />
@@ -92,8 +92,8 @@ const Sidebar = () => {
 				</Popup>
 			</div>
 
-			<div className={`${theme ? " bg-dark-gray-text-color" : ""} overflow-scroll top-0 h-[93%] xl:w-[92%] xl:h-[100%]`}>
-				<Outlet context={[searchBarVisible, setSearchBarVisible]} />
+			<div className={`${isDarkTheme ? " bg-dark-gray-text-color" : ""} overflow-scroll top-0 h-[93%] xl:w-[92%] xl:h-[100%]`}>
+				<Outlet context={[isSearchBarVisible, setIsSearchBarVisible]} />
 			</div>
 		</div>
 

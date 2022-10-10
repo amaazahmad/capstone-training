@@ -118,7 +118,7 @@ const Form = ({ fields, buttonText, cancelButton, onCancelHandler, onSubmitHandl
 							CANCEL
 						</button>
 						:
-						<></>
+						null
 					}
 				</div>
 

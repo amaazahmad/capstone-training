@@ -17,18 +17,18 @@ import { getBlogs } from "../../utils/firebase/firebaseDB.utils"
 
 const HomePage = () => {
 
-	const { theme, setTheme } = useContext(ThemeContext);
+	const { isDarkTheme, setIsDarkTheme } = useContext(ThemeContext);
 	const [blogs, setBlogs] = useState<BlogData[] | null>(null)
 	const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
-	const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
+	const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 	const refSearchBar = useRef<HTMLInputElement>(null);
 
 	type OutletContextType = [
-		searchBarVisible: boolean,
-		setSearchBarVisible: (visible: boolean) => {}
+		isSearchBarVisible: boolean,
+		setIsSearchBarVisible: (visible: boolean) => {}
 	]
-	const [searchBarVisible, setSearchBarVisible] = useOutletContext<OutletContextType>()
+	const [isSearchBarVisible, setIsSearchBarVisible] = useOutletContext<OutletContextType>()
 
 
 	useEffect(() => {
@@ -38,12 +38,12 @@ const HomePage = () => {
 
 	useEffect(() => {
 		const getBlogsAtHomePage = async () => {
-			setLoaderVisible(true)
+			setIsLoaderVisible(true)
 			const blogsRec = await getBlogs()
 			blogsRec.sort((objA, objB) => { return Number(objB.date) - Number(objA.date) })
 			setBlogs(blogsRec)
 			setFilteredBlogs(blogsRec)
-			setLoaderVisible(false)
+			setIsLoaderVisible(false)
 		}
 
 		getBlogsAtHomePage()
@@ -60,14 +60,14 @@ const HomePage = () => {
 	}
 
 	const outsideClickHandler = (event: any) => {
-		if (event.target !== refSearchBar.current && searchBarVisible && !refSearchBar.current?.value) {
-			setSearchBarVisible(false)
+		if (event.target !== refSearchBar.current && isSearchBarVisible && !refSearchBar.current?.value) {
+			setIsSearchBarVisible(false)
 		}
 	}
 
 	const themeChangeHandler = () => {
-		localStorage.setItem('theme', !theme ? "dark" : "light")
-		setTheme((!theme))
+		localStorage.setItem('theme', !isDarkTheme ? "dark" : "light")
+		setIsDarkTheme((!isDarkTheme))
 	}
 
 	const clearSearchClickHandler = () => {
@@ -77,10 +77,10 @@ const HomePage = () => {
 	}
 
 	return (
-		<div className={`${theme ? "bg-dark-gray-text-color" : ""} mt-16 md:mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
+		<div className={`${isDarkTheme ? "bg-dark-gray-text-color" : ""} mt-16 md:mt-24 flex flex-col justify-center  ml-4 mr-4 md:items-start xl:ml-16 xl:max-w-screen-2xl`} onClickCapture={outsideClickHandler}>
 			<img className="w-5 ml-4 md:ml-8 " src="/assets/icons/rectangle.svg" alt="" />
 			<div className="flex flex-row w-full justify-between pr-4 pl-4 md:pr-8 md:pl-8">
-				<h1 className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6 `}>
+				<h1 className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca font-normal text-xl leading-6 `}>
 					Latest
 				</h1>
 				{screenWidth >= 768 ?
@@ -88,18 +88,18 @@ const HomePage = () => {
 						<input
 							type='search'
 							ref={refSearchBar}
-							className={`${searchBarVisible ? "mt-[40px] w-96 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
+							className={`${isSearchBarVisible ? "mt-[40px] w-96 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
 							onChange={searchChangeHandler}
 						/>
-						<FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
+						<FontAwesomeIcon onClick={clearSearchClickHandler} className={`${isSearchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
 					</div>
 					:
-					<></>
+					null
 				}
 				<Switch
 					checkedIcon={<img src="/assets/icons/sun.png" alt="" className="w-6 pt-1 pl-1" />}
 					uncheckedIcon={<img src="/assets/icons/moon.png" alt="" className="w-6 pt-1 pl-1" />}
-					checked={theme} onChange={themeChangeHandler}
+					checked={isDarkTheme} onChange={themeChangeHandler}
 				/>
 
 			</div>
@@ -109,16 +109,16 @@ const HomePage = () => {
 						<input
 							type='search'
 							ref={refSearchBar}
-							className={`${searchBarVisible ? "mt-[40px] w-64 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
+							className={`${isSearchBarVisible ? "mt-[40px] w-64 duration-500 border-solid border-green-text-color border-2 border-r rounded-[50px] pl-2  pr-2 outline-none font-lexend-deca" : "w-0 duration-500"}`}
 							onChange={searchChangeHandler}
 						/>
-						<FontAwesomeIcon onClick={clearSearchClickHandler} className={`${searchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
+						<FontAwesomeIcon onClick={clearSearchClickHandler} className={`${isSearchBarVisible ? "-ml-5 text-secondary-text-color" : "hidden"}`} icon={faXmark} />
 					</div>
 					:
-					<></>
+					null
 				}
 			</div>
-			<Bars visible={loaderVisible} height="100" width="100" color="rgba(86, 204, 106, 1)" wrapperStyle={{ alignSelf: 'center', marginTop: '120px' }} />
+			<Bars visible={isLoaderVisible} height="100" width="100" color="rgba(86, 204, 106, 1)" wrapperStyle={{ alignSelf: 'center', marginTop: '120px' }} />
 			<BlogList blogs={filteredBlogs} isMyBlogs={false} />
 		</div>
 	)

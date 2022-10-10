@@ -38,8 +38,8 @@ const App = () => {
 					<Route index={true} element={<HomePage />} />
 					<Route path="my-blogs" element={<MyBlogs />} />
 				</Route>
-				<Route path="/login" element={<LoginPage />}></Route>
-				<Route path="/signup" element={<SignupPage />}></Route>
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/blog/:blogID" element={<BlogView />} />
 			</Routes>
 		</div>

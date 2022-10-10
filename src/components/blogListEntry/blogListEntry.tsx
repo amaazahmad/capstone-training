@@ -22,7 +22,7 @@ const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntr
 
 	const { title, email, content, date } = blog;
 	const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric' }).toUpperCase();
-	const { theme } = useContext(ThemeContext)
+	const { isDarkTheme } = useContext(ThemeContext)
 	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
 	const [deletePopup, setDeletePopup] = useState<boolean>(false);
 	const [editPopup, setEditPopup] = useState<boolean>(false);
@@ -39,11 +39,11 @@ const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntr
 	return (
 		<div className="box-border flex flex-col text-left pb-8 pl-4 pr-4 md:pl-8 md:pr-8 ">
 			{screenWidth >= 768 ?
-				<p className={`${theme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-4 `}>
+				<p className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-4 `}>
 					{dateToDisplay}
 				</p>
 				:
-				<></>
+				null
 			}
 			<div className="w-full flex flex-row justify-between">
 				<Link to={`/blog/${blog.key}`} state={{ blog }} style={{ width: '100%' }}>
@@ -56,7 +56,7 @@ const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntr
 						open={editPopup}
 						onOpen={() => { setEditPopup(true) }}
 						onClose={() => { setEditPopup(false) }}
-						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0, width: '75%', height: '70%' } : { padding: 0, border: 0, width: '75%', height: '70%' }}
+						contentStyle={{ padding: 0, border: 0, width: '75%', height: '70%' }}
 						modal
 						closeOnDocumentClick={false}
 						repositionOnResize
@@ -82,11 +82,11 @@ const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntr
 					</Popup>
 
 
-				</div> : <></>}
+				</div> : null}
 
 			</div>
 			<TextTruncate
-				containerClassName={`${theme ? "text-white" : "text-dark-gray-text-color"} whitespace-pre-wrap font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
+				containerClassName={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} whitespace-pre-wrap font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
 				md:text-[20px] md:leading-[25px]`}
 				line={screenWidth < 768 ? 6 : 3} element="p" truncateText='' text={content}
 				textTruncateChild={
@@ -100,11 +100,11 @@ const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntr
 			/>
 			<div className=' flex flex-row justify-between '>
 				{screenWidth < 768 ?
-					<p className={`${theme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-semibold text-[16px] leading-5 `}>
+					<p className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-semibold text-[16px] leading-5 `}>
 						{dateToDisplay}
 					</p>
 					:
-					<></>}
+					null}
 				<p className="font-lexend-deca not-italic font-light text-base leading-5 text-secondary-text-color">{email}</p>
 			</div>
 		</div>

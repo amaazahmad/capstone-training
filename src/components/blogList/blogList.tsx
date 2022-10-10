@@ -14,7 +14,7 @@ type BlogListProps = {
 
 const BlogList = ({ blogs, isMyBlogs, setRefreshAfterDeletion }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string>("")
-	const { theme } = useContext(ThemeContext)
+	const { isDarkTheme } = useContext(ThemeContext)
 
 	useEffect(() => {
 		if (blogs?.length === 0) setPageState("No blogs found.")
@@ -32,7 +32,7 @@ const BlogList = ({ blogs, isMyBlogs, setRefreshAfterDeletion }: BlogListProps) 
 				</div>
 			) : (
 				<div className="w-full flex justify-center items-center m-0">
-					<p className={`${theme ? "text-white" : "text-dark-gray-text-color"} pl-8 pt-8 text-xl font-normal font-lexend-deca box-border`}>{pageState}</p>
+					<p className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} pl-8 pt-8 text-xl font-normal font-lexend-deca box-border`}>{pageState}</p>
 				</div>
 			)}
 		</>

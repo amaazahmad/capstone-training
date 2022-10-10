@@ -1,4 +1,4 @@
-export type BlogData = {
+export interface BlogData {
      key: string,
      title: string,
      email: string,
