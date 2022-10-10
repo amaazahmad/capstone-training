@@ -47,7 +47,7 @@ const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntr
 			}
 			<div className="w-full flex flex-row justify-between">
 				<Link to={`/blog/${blog.key}`} state={{ blog }} style={{ width: '100%' }}>
-					<h1 className=" w-4/5 font-dm-serif-display not-italic font-normal text-2xl  text-green-text-color mb-[10px] mt-0 cursor-pointer
+					<h1 className=" w-4/5 break-words font-dm-serif-display not-italic font-normal text-2xl  text-green-text-color mb-[10px] mt-0 cursor-pointer
 						md:text-[32px] md:leading-[44px] xl:mt-[10px] xl:mb-4">{title}</h1>
 				</Link>
 				{isMyBlog ? <div className='w-1/5 flex flex-row pt-2 justify-end'>

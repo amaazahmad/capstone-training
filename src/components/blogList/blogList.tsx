@@ -25,7 +25,7 @@ const BlogList = ({ blogs, isMyBlogs, setRefreshAfterDeletion }: BlogListProps) 
 	return (
 		<>
 			{blogs?.length ? (
-				<div className="mb-5 mt-8">
+				<div className="mb-5 mt-8 md:w-full">
 					{blogs?.map((blog) => {
 						return <BlogListEntry key={blog.key} blog={blog} isMyBlog={isMyBlogs} setRefreshAfterDeletion={setRefreshAfterDeletion} />
 					})}
