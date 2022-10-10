@@ -10,10 +10,8 @@ import Sidebar from "./components/sidebar/sidebar.component"
 import MyBlogs from "./pages/myBlogs/myBlogs"
 import BlogView from "./pages/blogView/blogView.component"
 
-//styles
-import "./App.css"
 
-function App() {
+const App = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
 
@@ -34,7 +32,7 @@ function App() {
 	)
 
 	return (
-		<div className="App">
+		<div className=" text-center box-border">
 			<Routes>
 				<Route path='/' element={<Sidebar />}>
 					<Route index={true} element={<HomePage />} />

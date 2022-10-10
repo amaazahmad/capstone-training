@@ -63,7 +63,7 @@ const Sidebar = () => {
 					closeOnDocumentClick={false}
 					repositionOnResize
 					trigger={<div className="flex flex-row justify-center items-center xl:flex-col xl:w-full xl:mb-12">
-						<img className="w-8" src="/assets/icons/add_circle.svg" alt="" />
+						<img className="w-8" src="/assets/icons/addCircle.svg" alt="" />
 						<p className="hidden md:block md:font-lexend-deca md:not-italic md:font-normal md:text-xl md:leading-6 md:text-white md:ml-1">create</p>
 					</div>}
 				>
