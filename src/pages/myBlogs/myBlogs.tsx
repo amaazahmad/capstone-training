@@ -21,6 +21,7 @@ const MyBlogs = () => {
      const [blogs, setBlogs] = useState<BlogData[] | null>(null)
      const [filteredBlogs, setFilteredBlogs] = useState<BlogData[] | null>(null);
      const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
+     const [refreshAfterDeletion, setRefreshAfterDeletion] = useState<boolean>(false);
      const refSearchBar = useRef<HTMLInputElement>(null);
      const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
      const email = useContext(UserContext)?.currentUser?.email;
@@ -42,6 +43,8 @@ const MyBlogs = () => {
      })
 
      useEffect(() => {
+          setBlogs(null);
+          setFilteredBlogs(null);
           const getBlogsAtHomePage = async () => {
                setLoaderVisible(true)
                const blogsRec = await getBlogs(email)
@@ -50,9 +53,9 @@ const MyBlogs = () => {
                setFilteredBlogs(blogsRec)
                setLoaderVisible(false)
           }
-
+          setRefreshAfterDeletion(false)
           getBlogsAtHomePage()
-     }, [email])
+     }, [email, refreshAfterDeletion])
 
      const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
           const searchField = event.target.value.toLowerCase()
@@ -117,7 +120,7 @@ const MyBlogs = () => {
                     }
                </div>
                <Bars visible={loaderVisible} height="100" width="100" color="rgba(86, 204, 106, 1)" wrapperStyle={{ alignSelf: 'center', marginTop: '120px' }} />
-               <BlogList blogs={filteredBlogs} isMyBlogs={true} />
+               <BlogList blogs={filteredBlogs} isMyBlogs={true} setRefreshAfterDeletion={setRefreshAfterDeletion} />
           </div>
      )
 }

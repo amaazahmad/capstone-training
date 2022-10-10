@@ -8,10 +8,11 @@ import { ThemeContext } from "../../context/theme/theme.context"
 
 type BlogListProps = {
 	blogs: BlogData[] | null,
-	isMyBlogs: boolean
+	isMyBlogs: boolean,
+	setRefreshAfterDeletion?: (refresh: boolean) => void
 }
 
-const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
+const BlogList = ({ blogs, isMyBlogs, setRefreshAfterDeletion }: BlogListProps) => {
 	const [pageState, setPageState] = useState<string>("")
 	const { theme } = useContext(ThemeContext)
 
@@ -26,7 +27,7 @@ const BlogList = ({ blogs, isMyBlogs }: BlogListProps) => {
 			{blogs?.length ? (
 				<div className="mb-5 mt-8">
 					{blogs?.map((blog) => {
-						return <BlogListEntry key={blog.key} blog={blog} isMyBlog={isMyBlogs} />
+						return <BlogListEntry key={blog.key} blog={blog} isMyBlog={isMyBlogs} setRefreshAfterDeletion={setRefreshAfterDeletion} />
 					})}
 				</div>
 			) : (

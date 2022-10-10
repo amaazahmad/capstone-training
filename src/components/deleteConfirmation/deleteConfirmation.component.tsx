@@ -9,9 +9,10 @@ import { deleteBlog } from '../../utils/firebase/firebaseDB.utils'
 type DeleteConfirmationProps = {
      blogID: string;
      setDeletePopup: (isOpen: boolean) => void;
+     setRefreshAfterDeletion?: (refresh: boolean) => void;
 }
 
-const DeleteConfirmation = ({ blogID, setDeletePopup }: DeleteConfirmationProps) => {
+const DeleteConfirmation = ({ blogID, setDeletePopup, setRefreshAfterDeletion }: DeleteConfirmationProps) => {
 
      const { theme } = useContext(ThemeContext);
      const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
@@ -20,7 +21,9 @@ const DeleteConfirmation = ({ blogID, setDeletePopup }: DeleteConfirmationProps)
           setLoaderVisible(true)
           await deleteBlog(id);
           setDeletePopup(false);
-          window.location.reload();
+          // window.location.reload();
+          if (setRefreshAfterDeletion)
+               setRefreshAfterDeletion(true);
      }
 
      return (

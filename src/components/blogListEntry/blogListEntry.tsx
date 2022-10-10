@@ -14,10 +14,11 @@ import { ThemeContext } from '../../context/theme/theme.context'
 
 type BlogListEntryProps = {
 	blog: BlogData,
-	isMyBlog: boolean
+	isMyBlog: boolean,
+	setRefreshAfterDeletion?: (refresh: boolean) => void;
 }
 
-const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
+const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntryProps) => {
 
 	const { title, email, content, date } = blog;
 	const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric' }).toUpperCase();
@@ -77,7 +78,7 @@ const BlogListEntry = ({ blog, isMyBlog }: BlogListEntryProps) => {
 						trigger={<img className='w-5 h-5 md:w-6 md:h-6 cursor-pointer' src="/assets/icons/redDeleteIcon.png" alt="" />}
 					>
 						<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setDeletePopup(false) }}>&times;</button>
-						<DeleteConfirmation setDeletePopup={setDeletePopup} blogID={blog.key} />
+						<DeleteConfirmation setRefreshAfterDeletion={setRefreshAfterDeletion} setDeletePopup={setDeletePopup} blogID={blog.key} />
 					</Popup>
 
 
