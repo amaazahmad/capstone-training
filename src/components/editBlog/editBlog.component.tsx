@@ -34,9 +34,9 @@ const EditBlog = ({ blog, setEditPopup }: EditBlogProps) => {
                },
                defaultValue: blog?.title,
                styles: `${isDarkTheme ? "text-white bg-dark-gray-text-color border-green-text-color" : "bg-white text-gray-900 border-secondary-text-color focus:border-green-text-color"} 
-               border-2 w-[110%]
+               border-2 w-[110%] lg:max-w-none
                sm:w-full
-               lg:text-lg lg:max-w-[none]`
+               lg:text-lg`
           },
           {
                name: "content",
