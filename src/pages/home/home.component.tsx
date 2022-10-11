@@ -119,7 +119,14 @@ const HomePage = () => {
 				}
 			</div>
 			<Bars visible={isLoaderVisible} height="100" width="100" color="rgba(86, 204, 106, 1)" wrapperStyle={{ alignSelf: 'center', marginTop: '120px' }} />
-			<BlogList blogs={filteredBlogs} isMyBlogs={false} />
+			{!isLoaderVisible && !filteredBlogs?.length ?
+				<div className="w-full flex justify-center items-center m-0">
+					<p className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} pl-8 pt-8 text-xl font-normal           font-lexend-deca box-border`}>NO BLOGS FOUND
+					</p>
+				</div>
+				:
+				<BlogList blogs={filteredBlogs} isMyBlogs={true} />
+			}
 		</div>
 	)
 }
