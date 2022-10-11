@@ -1,0 +1,114 @@
+import { useEffect, useState, useContext } from 'react';
+
+import TextTruncate from 'react-text-truncate';
+import { Link } from 'react-router-dom';
+import Popup from 'reactjs-popup';
+
+import DeleteConfirmation from '../deleteConfirmation/deleteConfirmation.component';
+import EditBlog from '../editBlog/editBlog.component';
+
+import { BlogData } from '../../types/blog/blog'
+
+import { ThemeContext } from '../../context/theme/theme.context'
+
+
+type BlogListEntryProps = {
+	blog: BlogData,
+	isMyBlog: boolean,
+	setRefreshAfterDeletion?: (refresh: boolean) => void;
+}
+
+const BlogListEntry = ({ blog, isMyBlog, setRefreshAfterDeletion }: BlogListEntryProps) => {
+
+	const { title, email, content, date } = blog;
+	const dateToDisplay = date.toLocaleString('default', { month: 'long', day: 'numeric' }).toUpperCase();
+	const { isDarkTheme } = useContext(ThemeContext)
+	const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
+	const [deletePopup, setDeletePopup] = useState<boolean>(false);
+	const [editPopup, setEditPopup] = useState<boolean>(false);
+
+	const updateScreenSize = () => {
+		setScreenWidth(window.innerWidth);
+	}
+
+	useEffect(() => {
+		window.addEventListener('resize', updateScreenSize);
+		return (() => { window.removeEventListener('resize', updateScreenSize) })
+	})
+
+	return (
+		<div className="box-border flex flex-col text-left pb-8 pl-4 pr-4 md:pl-8 md:pr-8 ">
+			{screenWidth >= 768 ?
+				<p className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"}  font-lexend-deca not-italic font-semibold text-[24px] leading-4 `}>
+					{dateToDisplay}
+				</p>
+				:
+				null
+			}
+			<div className="w-full flex flex-row justify-between">
+				<Link to={`/blog/${blog.key}`} state={{ blog }} style={{ width: '100%' }}>
+					<h1 className=" w-4/5 break-words font-dm-serif-display not-italic font-normal text-2xl  text-green-text-color mb-[10px] mt-0 cursor-pointer
+						md:text-[32px] md:leading-[44px] xl:mt-[10px] xl:mb-4">{title}</h1>
+				</Link>
+				{isMyBlog ? <div className='w-1/5 flex flex-row pt-2 justify-end'>
+					<Popup
+						defaultOpen={editPopup}
+						open={editPopup}
+						onOpen={() => { setEditPopup(true) }}
+						onClose={() => { setEditPopup(false) }}
+						contentStyle={{ padding: 0, border: 0, width: '75%', height: '70%' }}
+						modal
+						closeOnDocumentClick={false}
+						repositionOnResize
+						trigger={<img className='w-5 h-5 mr-4 md:w-6 md:h-6' src="/assets/icons/editIcon.png" alt="" />}
+					>
+						<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setEditPopup(false) }}>&times;</button>
+						<EditBlog blog={blog} setEditPopup={setEditPopup} />
+					</Popup>
+
+					<Popup
+						defaultOpen={deletePopup}
+						open={deletePopup}
+						onOpen={() => { setDeletePopup(true) }}
+						onClose={() => { setDeletePopup(false) }}
+						contentStyle={screenWidth >= 768 ? { padding: 0, border: 0 } : { padding: 0, border: 0, width: '85%' }}
+						modal
+						closeOnDocumentClick={false}
+						repositionOnResize
+						trigger={<img className='w-5 h-5 md:w-6 md:h-6 cursor-pointer' src="/assets/icons/redDeleteIcon.png" alt="" />}
+					>
+						<button className=" cursor-pointer absolute block pt-1 pb-2 pr-2 pl-2 leading-5 -right-2 -top-2 text-2xl bg-white border-2 border-solid border-green-text-color rounded-xl" onClick={() => { setDeletePopup(false) }}>&times;</button>
+						<DeleteConfirmation setRefreshAfterDeletion={setRefreshAfterDeletion} setDeletePopup={setDeletePopup} blogID={blog.key} />
+					</Popup>
+
+
+				</div> : null}
+
+			</div>
+			<TextTruncate
+				containerClassName={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} whitespace-pre-wrap font-lexend-deca not-italic font-normal text-[16px] leading-[20px] mb-[11px] mt-0 
+				md:text-[20px] md:leading-[25px]`}
+				line={screenWidth < 768 ? 6 : 3} element="p" truncateText='' text={content}
+				textTruncateChild={
+					<Link
+						className='font-lexend-deca not-italic font-normal text-base leading-5 text-green-text-color cursor-pointer md:text-xl md:leading-6'
+						to={`/blog/${blog.key}`}
+						state={{ blog }}
+					>
+						...read more
+					</Link>}
+			/>
+			<div className=' flex flex-row justify-between '>
+				{screenWidth < 768 ?
+					<p className={`${isDarkTheme ? "text-white" : "text-dark-gray-text-color"} font-lexend-deca not-italic font-semibold text-[16px] leading-5 `}>
+						{dateToDisplay}
+					</p>
+					:
+					null}
+				<p className="font-lexend-deca not-italic font-light text-base leading-5 text-secondary-text-color">{email}</p>
+			</div>
+		</div>
+	)
+}
+
+export default BlogListEntry
